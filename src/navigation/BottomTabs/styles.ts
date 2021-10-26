@@ -3,11 +3,11 @@ import {THEME} from '../../theme';
 
 export const styles = StyleSheet.create({
   tabStyle: {
-    backgroundColor: THEME.COLOR_LIGHT_GRAY,
+    backgroundColor: THEME.COLOR_WHITE,
     height: 70,
   },
   headerStyle: {
-    backgroundColor: THEME.COLOR_LIGHT_GRAY,
+    backgroundColor: THEME.COLOR_WHITE,
     height: 60,
   },
   titleStyle: {
@@ -21,7 +21,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 50,
-
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

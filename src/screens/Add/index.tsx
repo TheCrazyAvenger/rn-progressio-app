@@ -1,12 +1,13 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
+import {Forms} from '../../forms';
 
 import {styles} from './styles';
 
 export const Add: React.FC = () => {
   return (
-    <View style={styles.center}>
-      <Text>Add</Text>
+    <View style={styles.root}>
+      <Forms.Add />
     </View>
   );
 };

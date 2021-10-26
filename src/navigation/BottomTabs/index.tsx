@@ -5,6 +5,7 @@ import {TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Screens} from '../../screens';
 import {styles} from './styles';
+import {Projects} from '../Projects';
 
 const Tab = createBottomTabNavigator();
 
@@ -12,6 +13,8 @@ export const BottomTabs: React.FC = () => {
   return (
     <Tab.Navigator
       screenOptions={{
+        unmountOnBlur: true,
+
         headerShadowVisible: false,
         headerStyle: styles.headerStyle,
         headerTitleAlign: 'center',
@@ -27,14 +30,14 @@ export const BottomTabs: React.FC = () => {
               <View>
                 <Icon
                   name="home"
-                  size={30}
+                  size={focused ? 30 : 25}
                   color={focused ? THEME.COLOR_RED : THEME.COLOR_GRAY}
                 />
               </View>
             );
           },
         }}
-        component={Screens.Main}
+        component={Projects}
       />
       <Tab.Screen
         name="Search"
@@ -44,7 +47,7 @@ export const BottomTabs: React.FC = () => {
               <View>
                 <Icon
                   name="search"
-                  size={30}
+                  size={focused ? 30 : 25}
                   color={focused ? THEME.COLOR_RED : THEME.COLOR_GRAY}
                 />
               </View>
@@ -74,7 +77,7 @@ export const BottomTabs: React.FC = () => {
               <View>
                 <Icon
                   name="analytics"
-                  size={30}
+                  size={focused ? 30 : 25}
                   color={focused ? THEME.COLOR_RED : THEME.COLOR_GRAY}
                 />
               </View>
@@ -91,7 +94,7 @@ export const BottomTabs: React.FC = () => {
               <View>
                 <Icon
                   name="settings"
-                  size={30}
+                  size={focused ? 30 : 25}
                   color={focused ? THEME.COLOR_RED : THEME.COLOR_GRAY}
                 />
               </View>
