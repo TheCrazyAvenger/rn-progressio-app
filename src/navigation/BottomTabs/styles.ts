@@ -15,19 +15,8 @@ export const styles = StyleSheet.create({
     fontSize: 20,
   },
   addButton: {
-    backgroundColor: 'red',
-    width: 55,
-    height: 55,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 50,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.44,
-    shadowRadius: 10.32,
-    elevation: 15,
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
   },
 });

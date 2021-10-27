@@ -14,5 +14,5 @@ export const Main: React.FC = () => {
     ));
   }, [projects]);
 
-  return <ScrollView style={styles.center}>{renderProjects}</ScrollView>;
+  return <ScrollView style={styles.root}>{renderProjects}</ScrollView>;
 };

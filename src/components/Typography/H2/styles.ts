@@ -1,14 +1,11 @@
 import {StyleSheet} from 'react-native';
-import {THEME} from '../../theme';
+import {THEME} from '../../../theme';
 
 export const styles = StyleSheet.create({
-  tabBarLabelStyle: {
-    color: THEME.COLOR_GRAY,
-    fontSize: 15,
-    fontFamily: 'Lato-Bold',
-  },
-  titleStyle: {
-    color: THEME.COLOR_GRAY,
+  default: {
     fontSize: 20,
+    fontFamily: 'Lato-Bold',
+    color: THEME.COLOR_GRAY,
+    textAlign: 'justify',
   },
 });

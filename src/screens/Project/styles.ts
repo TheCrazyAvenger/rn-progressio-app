@@ -7,11 +7,6 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 8,
   },
-  textInput: {
-    borderBottomWidth: 1.5,
-    marginBottom: 25,
-    width: 300,
-  },
   block: {
     marginBottom: 15,
     borderRadius: 15,
@@ -19,26 +14,43 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: THEME.COLOR_WHITE,
     shadowColor: '#000',
-    shadowOffset: {width: 0, height: 5},
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
     shadowOpacity: 0.34,
     shadowRadius: 15,
+
     elevation: 10,
+  },
+  image: {
+    width: '100%',
+    height: 200,
+    borderRadius: 15,
   },
   title: {
     borderBottomColor: THEME.COLOR_RED,
     borderBottomWidth: 2,
     paddingBottom: 5,
-    marginBottom: 20,
+    marginBottom: 15,
   },
-  calendar: {
-    backgroundColor: THEME.COLOR_BLUE,
-    marginTop: 15,
+  info: {
+    width: '100%',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexDirection: 'row',
   },
-  dateInput: {
+  infoText: {
+    color: THEME.COLOR_GRAY,
+  },
+  infoInner: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  date: {
-    marginLeft: 20,
+  buttons: {
+    flexDirection: 'row',
+  },
+  button: {
+    marginHorizontal: 10,
   },
 });

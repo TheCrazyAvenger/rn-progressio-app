@@ -2,9 +2,10 @@ import {StyleSheet} from 'react-native';
 import {THEME} from '../../theme';
 
 export const styles = StyleSheet.create({
-  center: {
-    flex: 1,
-    padding: 5,
+  root: {
+    flex: 0.9,
+    paddingHorizontal: 15,
+    paddingVertical: 8,
   },
   text: {
     fontFamily: 'Lato-Bold',

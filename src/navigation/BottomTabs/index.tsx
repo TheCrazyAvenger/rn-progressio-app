@@ -1,39 +1,42 @@
 import React from 'react';
 import {THEME} from '../../theme';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
 import {TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Screens} from '../../screens';
 import {styles} from './styles';
 import {Projects} from '../Projects';
+import {useNavigation} from '@react-navigation/core';
+import {UI} from '../../ui';
 
 const Tab = createBottomTabNavigator();
 
 export const BottomTabs: React.FC = () => {
+  const navigation: any = useNavigation();
+
   return (
     <Tab.Navigator
       screenOptions={{
-        unmountOnBlur: true,
-
-        headerShadowVisible: false,
         headerStyle: styles.headerStyle,
-        headerTitleAlign: 'center',
         headerTitleStyle: styles.titleStyle,
         tabBarShowLabel: false,
         tabBarStyle: styles.tabStyle,
       }}>
       <Tab.Screen
-        name="Progressio"
+        name="Main"
         options={{
+          headerShown: false,
           tabBarIcon: ({focused}) => {
             return (
-              <View>
+              <TouchableOpacity
+                onPress={() => navigation.navigate('Progressio')}>
                 <Icon
                   name="home"
                   size={focused ? 30 : 25}
                   color={focused ? THEME.COLOR_RED : THEME.COLOR_GRAY}
                 />
-              </View>
+              </TouchableOpacity>
             );
           },
         }}
@@ -46,7 +49,7 @@ export const BottomTabs: React.FC = () => {
             return (
               <View>
                 <Icon
-                  name="search"
+                  name="bookmarks"
                   size={focused ? 30 : 25}
                   color={focused ? THEME.COLOR_RED : THEME.COLOR_GRAY}
                 />
@@ -60,10 +63,16 @@ export const BottomTabs: React.FC = () => {
         name="Add"
         options={{
           tabBarIcon: () => {
+            const openAdd = () => {
+              navigation.navigate(Screens.Add);
+            };
             return (
-              <View style={styles.addButton}>
-                <Icon name="add" size={30} color={THEME.COLOR_WHITE} />
-              </View>
+              <UI.Button
+                name="add"
+                color={THEME.COLOR_WHITE}
+                style={styles.addButton}
+                callback={openAdd}
+              />
             );
           },
         }}
