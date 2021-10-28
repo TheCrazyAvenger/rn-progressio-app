@@ -2,31 +2,15 @@ import {StyleSheet} from 'react-native';
 import {THEME} from '../../theme';
 
 export const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    paddingHorizontal: 15,
-    paddingVertical: 8,
-  },
-  block: {
-    marginBottom: 15,
-    borderRadius: 15,
-    padding: 15,
+  renderInfo: {
+    marginHorizontal: 40,
     alignItems: 'center',
-    backgroundColor: THEME.COLOR_WHITE,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-    shadowOpacity: 0.34,
-    shadowRadius: 15,
-
-    elevation: 10,
+    marginBottom: 15,
   },
   image: {
     width: '100%',
     height: 200,
-    borderRadius: 15,
+    resizeMode: 'cover',
   },
   title: {
     borderBottomColor: THEME.COLOR_RED,
@@ -36,9 +20,10 @@ export const styles = StyleSheet.create({
   },
   info: {
     width: '100%',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   infoText: {
     color: THEME.COLOR_GRAY,
