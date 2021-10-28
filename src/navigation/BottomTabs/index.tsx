@@ -57,9 +57,9 @@ export const BottomTabs: React.FC = () => {
             );
           },
         }}
-        component={Screens.Search}
+        component={Screens.Bookmarks}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Add"
         options={{
           tabBarIcon: () => {
@@ -77,7 +77,7 @@ export const BottomTabs: React.FC = () => {
           },
         }}
         component={Screens.Add}
-      />
+      /> */}
       <Tab.Screen
         name="Analytics"
         options={{

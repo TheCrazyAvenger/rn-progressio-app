@@ -8,7 +8,6 @@ export const styles = StyleSheet.create({
   },
   headerStyle: {
     backgroundColor: THEME.COLOR_WHITE,
-    height: 60,
   },
   titleStyle: {
     color: THEME.COLOR_GRAY,
