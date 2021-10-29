@@ -1,19 +1,17 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {GET_PROJECTS} from './actionsType';
-import axios from 'axios';
 
 export const getProjects = createAsyncThunk(
   'projects/getProjects',
   async () => {
     try {
-      const response = await axios.get(
-        `https://rn-progressio-default-rtdb.firebaseio.com/projects.json`,
-      );
+      let data = await AsyncStorage.getItem('projects');
 
-      let data = response.data;
-      if (data === null || data === []) data = [];
-
-      return data;
+      if (data === null) {
+        return [];
+      } else {
+        return JSON.parse(data);
+      }
     } catch (e) {
       console.log(e);
     }
@@ -24,10 +22,8 @@ export const saveProjects = createAsyncThunk<any>(
   'projects/saveProjects',
   async data => {
     try {
-      await axios.put(
-        `https://rn-progressio-default-rtdb.firebaseio.com/projects.json`,
-        JSON.stringify(data),
-      );
+      console.log(data);
+      await AsyncStorage.setItem('projects', JSON.stringify(data));
     } catch (e) {
       console.log(e);
     }

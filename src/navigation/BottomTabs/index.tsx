@@ -1,14 +1,12 @@
 import React from 'react';
 import {THEME} from '../../theme';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-
 import {TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Screens} from '../../screens';
 import {styles} from './styles';
-import {Projects} from '../Projects';
+import {Bookmarks, Projects} from '../Projects';
 import {useNavigation} from '@react-navigation/core';
-import {UI} from '../../ui';
 
 const Tab = createBottomTabNavigator();
 
@@ -30,7 +28,8 @@ export const BottomTabs: React.FC = () => {
           tabBarIcon: ({focused}) => {
             return (
               <TouchableOpacity
-                onPress={() => navigation.navigate('Progressio')}>
+                activeOpacity={0.5}
+                onPress={() => navigation.navigate('Main')}>
                 <Icon
                   name="home"
                   size={focused ? 30 : 25}
@@ -43,53 +42,39 @@ export const BottomTabs: React.FC = () => {
         component={Projects}
       />
       <Tab.Screen
-        name="Search"
+        name="Bookmarks"
         options={{
+          headerShown: false,
           tabBarIcon: ({focused}) => {
             return (
-              <View>
+              <TouchableOpacity
+                activeOpacity={0.5}
+                onPress={() => navigation.navigate('Bookmarks')}>
                 <Icon
                   name="bookmarks"
                   size={focused ? 30 : 25}
                   color={focused ? THEME.COLOR_RED : THEME.COLOR_GRAY}
                 />
-              </View>
+              </TouchableOpacity>
             );
           },
         }}
-        component={Screens.Bookmarks}
+        component={Bookmarks}
       />
-      {/* <Tab.Screen
-        name="Add"
-        options={{
-          tabBarIcon: () => {
-            const openAdd = () => {
-              navigation.navigate(Screens.Add);
-            };
-            return (
-              <UI.Button
-                name="add"
-                color={THEME.COLOR_WHITE}
-                style={styles.addButton}
-                callback={openAdd}
-              />
-            );
-          },
-        }}
-        component={Screens.Add}
-      /> */}
       <Tab.Screen
         name="Analytics"
         options={{
           tabBarIcon: ({focused}) => {
             return (
-              <View>
+              <TouchableOpacity
+                activeOpacity={0.5}
+                onPress={() => navigation.navigate('Analytics')}>
                 <Icon
                   name="analytics"
                   size={focused ? 30 : 25}
                   color={focused ? THEME.COLOR_RED : THEME.COLOR_GRAY}
                 />
-              </View>
+              </TouchableOpacity>
             );
           },
         }}
@@ -100,13 +85,15 @@ export const BottomTabs: React.FC = () => {
         options={{
           tabBarIcon: ({focused}) => {
             return (
-              <View>
+              <TouchableOpacity
+                activeOpacity={0.5}
+                onPress={() => navigation.navigate('Settings')}>
                 <Icon
                   name="settings"
                   size={focused ? 30 : 25}
                   color={focused ? THEME.COLOR_RED : THEME.COLOR_GRAY}
                 />
-              </View>
+              </TouchableOpacity>
             );
           },
         }}

@@ -3,7 +3,7 @@ import addSlice from './slices/addSlice';
 
 export const store = configureStore({
   reducer: {
-    add: addSlice,
+    projects: addSlice,
   },
 });
 

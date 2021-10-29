@@ -9,14 +9,14 @@ import {Screens} from '..';
 import {getProjects} from '../../store/actions/projects';
 
 export const Main: React.FC = () => {
-  const projects = useAppSelector(state => state.add.projects);
+  const projects = useAppSelector(state => state.projects.projects);
   const navigation: any = useNavigation();
 
   const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //   dispatch(getProjects());
-  // }, []);
+  useEffect(() => {
+    dispatch(getProjects());
+  }, []);
 
   const openAdd = () => {
     navigation.navigate(Screens.Add);
@@ -28,7 +28,6 @@ export const Main: React.FC = () => {
     ));
   }, [projects]);
 
-  console.log(!!projects[0]);
   const renderScreen = () => {
     if (!!projects[0]) {
       return <UI.Root>{renderProjects}</UI.Root>;

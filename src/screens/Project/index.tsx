@@ -1,7 +1,9 @@
-import {useRoute} from '@react-navigation/core';
+import {useNavigation, useRoute} from '@react-navigation/core';
 import React, {useMemo} from 'react';
-import {Image, View} from 'react-native';
+import {Alert, Image, View} from 'react-native';
 import {Typography} from '../../components/Typography';
+import {useAppDispatch} from '../../store/hooks';
+import {removeProject} from '../../store/slices/addSlice';
 import {THEME} from '../../theme';
 import {UI} from '../../ui';
 
@@ -9,7 +11,28 @@ import {styles} from './styles';
 
 export const Project: React.FC = () => {
   const route: any = useRoute();
+  const navigation: any = useNavigation();
   const {data} = route.params;
+  const dispatch = useAppDispatch();
+
+  const deleteHandler = () =>
+    Alert.alert(
+      'Deleting a project...',
+      'Are you sure you want to delete it?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => {
+            dispatch(removeProject(data.id));
+            navigation.navigate('Progressio');
+          },
+        },
+      ],
+    );
 
   const renderInfo = useMemo(() => {
     return data.info.map((item: any, i: number) => {
@@ -72,6 +95,7 @@ export const Project: React.FC = () => {
               name="close-outline"
               color={THEME.COLOR_WHITE}
               style={styles.button}
+              callback={deleteHandler}
             />
           </View>
         </UI.Block>

@@ -20,7 +20,7 @@ export const Add: React.FC = () => {
   const [selectedLanguage, setSelectedLanguage] = useState();
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
-  const projects = useAppSelector(state => state.add.projects);
+  const projects = useAppSelector(state => state.projects.projects);
 
   const navigation: any = useNavigation();
 
@@ -31,6 +31,7 @@ export const Add: React.FC = () => {
       name: values.name,
       id: [...projects].length + 1,
       date: values.date,
+      booked: false,
       img: values.path,
       description: values.description,
       info: [
@@ -40,8 +41,8 @@ export const Add: React.FC = () => {
       ],
     };
     dispatch(addProject(project));
-    // ts-expect-error Expected 1 arguments, but got 0.ts(2554)
-    //dispatch(saveProjects(projects));
+    // @ts-expect-error Expected 1 arguments, but got 0.ts(2554)
+    dispatch(saveProjects(projects));
     navigation.navigate('Progressio');
   };
 
@@ -96,6 +97,7 @@ export const Add: React.FC = () => {
         setFieldTouched,
         setFieldValue,
         errors,
+        touched,
         isValid,
         handleSubmit,
       }) => {
@@ -141,16 +143,17 @@ export const Add: React.FC = () => {
                       <TextInput
                         style={{
                           ...styles.textInput,
-                          borderBottomColor: errors.name
-                            ? THEME.COLOR_RED
-                            : THEME.COLOR_GRAY,
+                          borderBottomColor:
+                            errors.name && touched.name
+                              ? THEME.COLOR_RED
+                              : THEME.COLOR_GRAY,
                         }}
                         value={values.name}
                         onChangeText={handleChange('name')}
                         onBlur={() => setFieldTouched('name')}
                         placeholder="Name your project"
                       />
-                      {errors.name && (
+                      {errors.name && touched.name && (
                         <Text
                           style={{
                             position: 'absolute',
@@ -171,16 +174,17 @@ export const Add: React.FC = () => {
                       <TextInput
                         style={{
                           ...styles.textInput,
-                          borderBottomColor: errors.description
-                            ? THEME.COLOR_RED
-                            : THEME.COLOR_GRAY,
+                          borderBottomColor:
+                            errors.description && touched.description
+                              ? THEME.COLOR_RED
+                              : THEME.COLOR_GRAY,
                         }}
                         value={values.description}
                         onChangeText={handleChange('description')}
                         onBlur={() => setFieldTouched('description')}
                         placeholder="Add a description"
                       />
-                      {errors.description && (
+                      {errors.description && touched.description && (
                         <Text
                           style={{
                             position: 'absolute',
@@ -199,16 +203,17 @@ export const Add: React.FC = () => {
                       <TextInput
                         style={{
                           ...styles.textInput,
-                          borderBottomColor: errors.category
-                            ? THEME.COLOR_RED
-                            : THEME.COLOR_GRAY,
+                          borderBottomColor:
+                            errors.category && touched.category
+                              ? THEME.COLOR_RED
+                              : THEME.COLOR_GRAY,
                         }}
                         value={values.category}
                         onChangeText={handleChange('category')}
                         onBlur={() => setFieldTouched('category')}
                         placeholder="Add a category"
                       />
-                      {errors.category && (
+                      {errors.category && touched.category && (
                         <Text
                           style={{
                             position: 'absolute',
@@ -234,9 +239,10 @@ export const Add: React.FC = () => {
                       <View
                         style={{
                           ...styles.textInput,
-                          borderBottomColor: errors.rating
-                            ? THEME.COLOR_RED
-                            : THEME.COLOR_GRAY,
+                          borderBottomColor:
+                            errors.rating && touched.rating
+                              ? THEME.COLOR_RED
+                              : THEME.COLOR_GRAY,
                         }}>
                         <Picker
                           style={{
@@ -256,7 +262,7 @@ export const Add: React.FC = () => {
                           <Picker.Item label="5" value={5} />
                         </Picker>
                       </View>
-                      {errors.rating && (
+                      {errors.rating && touched.rating && (
                         <Text
                           style={{
                             position: 'absolute',
@@ -275,16 +281,17 @@ export const Add: React.FC = () => {
                       <TextInput
                         style={{
                           ...styles.textInput,
-                          borderBottomColor: errors.time
-                            ? THEME.COLOR_RED
-                            : THEME.COLOR_GRAY,
+                          borderBottomColor:
+                            errors.time && touched.time
+                              ? THEME.COLOR_RED
+                              : THEME.COLOR_GRAY,
                         }}
                         value={values.time}
                         onChangeText={handleChange('time')}
                         onBlur={() => setFieldTouched('time')}
                         placeholder="How much time did you spend"
                       />
-                      {errors.time && (
+                      {errors.time && touched.time && (
                         <Text
                           style={{
                             position: 'absolute',
@@ -327,7 +334,7 @@ export const Add: React.FC = () => {
                           onCancel={hideDatePicker}
                         />
 
-                        {errors.date && (
+                        {errors.date && touched.date && (
                           <Text
                             style={{
                               position: 'absolute',
@@ -366,7 +373,7 @@ export const Add: React.FC = () => {
                       callback={openGallery}
                     />
                   </View>
-                  {errors.path && (
+                  {errors.path && touched.path && (
                     <Text
                       style={{
                         position: 'absolute',
