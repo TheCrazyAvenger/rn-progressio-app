@@ -1,14 +1,14 @@
 import React, {useMemo} from 'react';
+import {IProject} from '..';
 import {Components} from '../../components';
 import {useAppSelector} from '../../store/hooks';
 import {UI} from '../../ui';
-import {styles} from './styles';
 
 export const Bookmarks: React.FC = () => {
   const bookmarks = useAppSelector(state => state.projects.bookmarks);
 
   const renderBookmarks = useMemo(() => {
-    return bookmarks.map((item: any) => (
+    return bookmarks.map((item: IProject) => (
       <Components.ProjectItem key={item.id} data={item} />
     ));
   }, [bookmarks]);

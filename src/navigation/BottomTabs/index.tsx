@@ -1,7 +1,7 @@
 import React from 'react';
 import {THEME} from '../../theme';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {TouchableOpacity, View} from 'react-native';
+import {TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Screens} from '../../screens';
 import {styles} from './styles';
@@ -29,7 +29,7 @@ export const BottomTabs: React.FC = () => {
             return (
               <TouchableOpacity
                 activeOpacity={0.5}
-                onPress={() => navigation.navigate('Main')}>
+                onPress={() => navigation.navigate('Progressio')}>
                 <Icon
                   name="home"
                   size={focused ? 30 : 25}

@@ -1,34 +1,41 @@
+import {useNavigation, useRoute} from '@react-navigation/core';
 import {Formik} from 'formik';
 import React, {useState} from 'react';
-import {Image, Text, TextInput, View} from 'react-native';
-import {styles} from './styles';
-import {THEME} from '../../theme';
-import {Typography} from '../../components/Typography';
+import {Image, Text, View, TextInput} from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import {UI} from '../../ui';
-import {useNavigation} from '@react-navigation/core';
-import {useAppDispatch, useAppSelector} from '../../store/hooks';
-import {addProject} from '../../store/slices/addSlice';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {clearFields, launchCamera, openGallery, schema, IValues} from '..';
+import {Typography} from '../../components/Typography';
+import {THEME} from '../../theme';
+import {UI} from '../../ui';
+import {launchCamera, openGallery, schema, IValues} from '..';
+import {styles} from './styles';
+import {useAppDispatch} from '../../store/hooks';
+import {updateProject} from '../../store/slices/addSlice';
 
-export const Add: React.FC = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState();
+export const Edit: React.FC = () => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
-  const projects = useAppSelector(state => state.projects.projects);
-
   const navigation: any = useNavigation();
-
+  const route: any = useRoute();
   const dispatch = useAppDispatch();
 
-  const addNew = (values: IValues) => {
+  const data = route.params.data;
+  const info = data.info;
+
+  const {name, description, date, img, id, booked} = data;
+  const rating = info[0].value;
+  const time = info[1].value;
+  const category = info[2].value;
+
+  const [selectedLanguage, setSelectedLanguage] = useState(rating);
+
+  const update = (values: IValues) => {
     const project = {
       name: values.name,
-      id: [...projects].length + 1,
+      id,
       date: values.date,
-      booked: false,
+      booked,
       img: values.path,
       description: values.description,
       info: [
@@ -37,8 +44,8 @@ export const Add: React.FC = () => {
         {name: 'Category', value: values.category},
       ],
     };
-    dispatch(addProject(project));
-    navigation.navigate('Progressio');
+    dispatch(updateProject({project, id}));
+    navigation.pop(2);
   };
 
   const showDatePicker = () => {
@@ -53,15 +60,15 @@ export const Add: React.FC = () => {
     <Formik
       validationSchema={schema}
       initialValues={{
-        name: '',
-        description: '',
-        category: '',
-        rating: '',
-        time: '',
-        date: '',
-        path: '',
+        name,
+        description,
+        category,
+        rating,
+        time,
+        date,
+        path: img,
       }}
-      onSubmit={values => addNew(values)}>
+      onSubmit={values => update(values)}>
       {({
         values,
         handleChange,
@@ -77,7 +84,7 @@ export const Add: React.FC = () => {
             <UI.Root>
               <UI.Block>
                 <Typography.Title style={styles.title}>
-                  Tell about your project
+                  What would you like to edit?
                 </Typography.Title>
                 <View>
                   <Typography.Description>Name:</Typography.Description>
@@ -166,12 +173,6 @@ export const Add: React.FC = () => {
                     )}
                   </View>
                 </View>
-              </UI.Block>
-
-              <UI.Block>
-                <Typography.Title style={styles.title}>
-                  Add additional info
-                </Typography.Title>
                 <View>
                   <Typography.Description>Rating:</Typography.Description>
                   <View style={{position: 'relative'}}>
@@ -289,10 +290,9 @@ export const Add: React.FC = () => {
                   </View>
                 </View>
               </UI.Block>
-
               <UI.Block>
                 <Typography.Title style={styles.title}>
-                  Add a photo
+                  Edit photo
                 </Typography.Title>
                 <View style={styles.buttons}>
                   <UI.Button
@@ -340,17 +340,11 @@ export const Add: React.FC = () => {
               color={THEME.COLOR_WHITE}
               style={{
                 ...styles.markButton,
-                backgroundColor:
-                  isValid && values.name !== ''
-                    ? THEME.COLOR_BLUE
-                    : THEME.COLOR_GRAY,
+                backgroundColor: isValid ? THEME.COLOR_BLUE : THEME.COLOR_GRAY,
               }}
               name="checkmark-outline"
               disabled={!isValid}
-              callback={() => {
-                handleSubmit();
-                clearFields(values);
-              }}
+              callback={handleSubmit}
             />
           </>
         );

@@ -3,7 +3,7 @@ import {THEME} from '../../theme';
 
 export const styles = StyleSheet.create({
   renderInfo: {
-    marginHorizontal: 40,
+    marginHorizontal: 15,
     alignItems: 'center',
     marginBottom: 15,
   },
@@ -13,10 +13,7 @@ export const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   title: {
-    borderBottomColor: THEME.COLOR_RED,
-    borderBottomWidth: 2,
-    paddingBottom: 5,
-    marginBottom: 15,
+    marginBottom: 10,
   },
   info: {
     width: '100%',

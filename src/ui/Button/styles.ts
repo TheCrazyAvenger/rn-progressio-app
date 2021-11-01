@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     backgroundColor: THEME.COLOR_RED,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 15,
+    borderRadius: 7,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

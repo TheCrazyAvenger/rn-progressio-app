@@ -5,7 +5,7 @@ import {Components} from '../../components';
 import {UI} from '../../ui';
 import {THEME} from '../../theme';
 import {useNavigation} from '@react-navigation/core';
-import {Screens} from '..';
+import {IProject, Screens} from '..';
 import {getProjects} from '../../store/actions/projects';
 
 export const Main: React.FC = () => {
@@ -23,7 +23,7 @@ export const Main: React.FC = () => {
   };
 
   const renderProjects = useMemo(() => {
-    return projects.map((item: any) => (
+    return projects.map((item: IProject) => (
       <Components.ProjectItem key={item.id} data={item} />
     ));
   }, [projects]);

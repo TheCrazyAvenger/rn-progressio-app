@@ -1,5 +1,6 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {getProjects, saveProjects} from '../actions/projects';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {getProjects} from '../actions/projects';
 export interface AddState {
   projects: any;
   bookmarks: any;
@@ -25,12 +26,22 @@ const initialState: AddState = {
   bookmarks: [],
 };
 
+const saveProjects = async (data: any) => {
+  try {
+    await AsyncStorage.setItem('projects', JSON.stringify(data));
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 export const addSlice = createSlice({
   name: 'projects',
   initialState,
   reducers: {
     addProject: (state, action: PayloadAction<any>) => {
       state.projects.push(action.payload);
+
+      saveProjects(state.projects);
     },
     toogleBookmarks: (state, action: PayloadAction<number>) =>
       void state.projects.map((item: any) => {
@@ -38,6 +49,7 @@ export const addSlice = createSlice({
           item.booked = !item.booked;
           state.bookmarks = state.projects.filter((item: any) => item.booked);
         }
+        saveProjects(state.projects);
       }),
     removeProject: (state, action: PayloadAction<number>) => {
       state.projects = state.projects.filter(
@@ -46,6 +58,22 @@ export const addSlice = createSlice({
       state.bookmarks = state.bookmarks.filter(
         (item: any) => item.id !== action.payload,
       );
+      saveProjects(state.projects);
+    },
+    updateProject: (state, action: PayloadAction<any>) => {
+      state.projects = state.projects.map((item: any) => {
+        if (item.id === action.payload.id) {
+          item = action.payload.project;
+        }
+        return item;
+      });
+      state.bookmarks = state.bookmarks.map((item: any) => {
+        if (item.id === action.payload.id) {
+          item = action.payload.project;
+        }
+        return item;
+      });
+      saveProjects(state.projects);
     },
   },
   extraReducers: builder => {
@@ -54,12 +82,10 @@ export const addSlice = createSlice({
 
       state.bookmarks = state.projects.filter((item: any) => item.booked);
     });
-    builder.addCase(saveProjects.fulfilled, () => {
-      return;
-    });
   },
 });
 
-export const {addProject, toogleBookmarks, removeProject} = addSlice.actions;
+export const {addProject, toogleBookmarks, removeProject, updateProject} =
+  addSlice.actions;
 
 export default addSlice.reducer;

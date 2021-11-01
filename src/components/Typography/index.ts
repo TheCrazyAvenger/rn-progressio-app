@@ -4,3 +4,5 @@ import {Subtitle} from './Subtitle';
 import {Title} from './Title';
 
 export const Typography = {Title, Subtitle, Description, H2};
+
+export * from './PropTypes';

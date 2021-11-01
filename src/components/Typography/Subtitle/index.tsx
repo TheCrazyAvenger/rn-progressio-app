@@ -1,11 +1,8 @@
 import React from 'react';
 import {Text} from 'react-native-paper';
+import {TypographyProps} from '..';
 import {styles} from './styles';
 
-type TitleProps = {
-  style?: any;
-};
-
-export const Subtitle: React.FC<TitleProps> = ({children, style}) => {
+export const Subtitle: React.FC<TypographyProps> = ({children, style}) => {
   return <Text style={{...styles.default, ...style}}>{children}</Text>;
 };
