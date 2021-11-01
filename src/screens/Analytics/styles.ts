@@ -7,4 +7,9 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  analytics: {
+    borderRadius: 7,
+    alignSelf: 'center',
+    elevation: 4,
+  },
 });

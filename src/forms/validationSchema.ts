@@ -23,3 +23,10 @@ export let schema = yup.object().shape({
   date: yup.string().required('Choose date'),
   path: yup.string().required('Add a photo'),
 });
+
+export let goalSchema = yup.object().shape({
+  goal: yup
+    .number()
+    .required('Goal is required')
+    .max(100, '100 is quiet enough'),
+});

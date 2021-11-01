@@ -5,6 +5,8 @@ export const styles = StyleSheet.create({
   block: {
     position: 'relative',
     marginBottom: 10,
+    alignSelf: 'center',
+    width: '98%',
     borderRadius: 7,
     overflow: 'hidden',
     padding: 15,
@@ -18,6 +20,6 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowRadius: 15,
 
-    elevation: 4,
+    elevation: 3,
   },
 });

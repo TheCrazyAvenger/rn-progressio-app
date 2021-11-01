@@ -1,9 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {createAsyncThunk, createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {getProjects} from '../actions/projects';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {getGoal, getProjects} from '../actions/projects';
 export interface AddState {
   projects: any;
   bookmarks: any;
+  goal: null | number;
 }
 
 const initialState: AddState = {
@@ -24,11 +25,20 @@ const initialState: AddState = {
     //   },
   ],
   bookmarks: [],
+  goal: null,
 };
 
 const saveProjects = async (data: any) => {
   try {
     await AsyncStorage.setItem('projects', JSON.stringify(data));
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const saveGoal = async (goal: number) => {
+  try {
+    await AsyncStorage.setItem('goal', JSON.stringify(goal));
   } catch (e) {
     console.log(e);
   }
@@ -75,6 +85,10 @@ export const addSlice = createSlice({
       });
       saveProjects(state.projects);
     },
+    setGoal: (state, action: PayloadAction<number>) => {
+      state.goal = action.payload;
+      saveGoal(action.payload);
+    },
   },
   extraReducers: builder => {
     builder.addCase(getProjects.fulfilled, (state, action) => {
@@ -82,10 +96,18 @@ export const addSlice = createSlice({
 
       state.bookmarks = state.projects.filter((item: any) => item.booked);
     });
+    builder.addCase(getGoal.fulfilled, (state, action) => {
+      state.goal = action.payload;
+    });
   },
 });
 
-export const {addProject, toogleBookmarks, removeProject, updateProject} =
-  addSlice.actions;
+export const {
+  addProject,
+  toogleBookmarks,
+  removeProject,
+  updateProject,
+  setGoal,
+} = addSlice.actions;
 
 export default addSlice.reducer;

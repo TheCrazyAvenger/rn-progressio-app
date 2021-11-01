@@ -18,14 +18,16 @@ export const getProjects = createAsyncThunk(
   },
 );
 
-export const saveProjects = createAsyncThunk<any>(
-  'projects/saveProjects',
-  async data => {
-    try {
-      console.log(data);
-      await AsyncStorage.setItem('projects', JSON.stringify(data));
-    } catch (e) {
-      console.log(e);
+export const getGoal = createAsyncThunk('projects/getGoal', async () => {
+  try {
+    let goal = await AsyncStorage.getItem('goal');
+
+    if (goal === null) {
+      return goal;
+    } else {
+      return JSON.parse(goal);
     }
-  },
-);
+  } catch (e) {
+    console.log(e);
+  }
+});

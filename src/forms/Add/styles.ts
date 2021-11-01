@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
   textInput: {
     borderBottomWidth: 1.5,
     marginBottom: 25,
-    width: 300,
+    minWidth: '100%',
   },
   title: {
     paddingBottom: 5,

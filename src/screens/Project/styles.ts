@@ -3,7 +3,7 @@ import {THEME} from '../../theme';
 
 export const styles = StyleSheet.create({
   renderInfo: {
-    marginHorizontal: 15,
+    marginHorizontal: 10,
     alignItems: 'center',
     marginBottom: 15,
   },
