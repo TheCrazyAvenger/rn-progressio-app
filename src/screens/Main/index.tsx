@@ -7,6 +7,7 @@ import {THEME} from '../../theme';
 import {useNavigation} from '@react-navigation/core';
 import {IProject, Screens} from '..';
 import {getGoal, getProjects} from '../../store/actions/projects';
+import {getTheme} from '../../store/actions/theme';
 
 export const Main: React.FC = () => {
   const projects = useAppSelector(state => state.projects.projects);
@@ -17,6 +18,7 @@ export const Main: React.FC = () => {
   useEffect(() => {
     dispatch(getProjects());
     dispatch(getGoal());
+    dispatch(getTheme());
   }, []);
 
   const openAdd = () => {

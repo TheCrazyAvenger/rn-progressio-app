@@ -5,6 +5,5 @@ export const styles = StyleSheet.create({
   default: {
     fontSize: 25,
     fontFamily: 'Lato-Bold',
-    color: THEME.COLOR_GRAY,
   },
 });

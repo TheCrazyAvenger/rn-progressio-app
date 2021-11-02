@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
   },
   textInput: {
     borderBottomWidth: 1.5,
-    marginBottom: 25,
+    marginBottom: 10,
     minWidth: '35%',
   },
   title: {

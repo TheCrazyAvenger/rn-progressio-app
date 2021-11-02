@@ -10,11 +10,13 @@ import {THEME} from '../../theme';
 import {UI} from '../../ui';
 import {launchCamera, openGallery, schema, IValues} from '..';
 import {styles} from './styles';
-import {useAppDispatch} from '../../store/hooks';
+import {useAppDispatch, useAppSelector} from '../../store/hooks';
 import {updateProject} from '../../store/slices/addSlice';
+import {setColor} from '../../utilities/utilities';
 
 export const Edit: React.FC = () => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const theme = useAppSelector(state => state.theme.theme);
 
   const navigation: any = useNavigation();
   const route: any = useRoute();
@@ -90,12 +92,14 @@ export const Edit: React.FC = () => {
                   <Typography.Description>Name:</Typography.Description>
                   <View style={{position: 'relative'}}>
                     <TextInput
+                      placeholderTextColor={setColor(theme)}
                       style={{
                         ...styles.textInput,
+                        color: setColor(theme),
                         borderBottomColor:
                           errors.name && touched.name
                             ? THEME.COLOR_RED
-                            : THEME.COLOR_GRAY,
+                            : setColor(theme),
                       }}
                       value={values.name}
                       onChangeText={handleChange('name')}
@@ -119,12 +123,14 @@ export const Edit: React.FC = () => {
                   <Typography.Description>Description:</Typography.Description>
                   <View style={{position: 'relative'}}>
                     <TextInput
+                      placeholderTextColor={setColor(theme)}
                       style={{
                         ...styles.textInput,
+                        color: setColor(theme),
                         borderBottomColor:
                           errors.description && touched.description
                             ? THEME.COLOR_RED
-                            : THEME.COLOR_GRAY,
+                            : setColor(theme),
                       }}
                       value={values.description}
                       onChangeText={handleChange('description')}
@@ -148,12 +154,14 @@ export const Edit: React.FC = () => {
                   <Typography.Description>Category:</Typography.Description>
                   <View style={{position: 'relative'}}>
                     <TextInput
+                      placeholderTextColor={setColor(theme)}
                       style={{
                         ...styles.textInput,
+                        color: setColor(theme),
                         borderBottomColor:
                           errors.category && touched.category
                             ? THEME.COLOR_RED
-                            : THEME.COLOR_GRAY,
+                            : setColor(theme),
                       }}
                       value={values.category}
                       onChangeText={handleChange('category')}
@@ -182,24 +190,49 @@ export const Edit: React.FC = () => {
                         borderBottomColor:
                           errors.rating && touched.rating
                             ? THEME.COLOR_RED
-                            : THEME.COLOR_GRAY,
+                            : setColor(theme),
                       }}>
                       <Picker
                         style={{
                           width: '100%',
                         }}
                         mode="dropdown"
+                        dropdownIconColor={setColor(theme)}
                         selectedValue={selectedLanguage}
                         onValueChange={itemValue => {
                           setSelectedLanguage(itemValue);
                           setFieldValue('rating', itemValue);
                         }}>
-                        <Picker.Item label="Choose one" value="" />
-                        <Picker.Item label="1" value={1} />
-                        <Picker.Item label="2" value={2} />
-                        <Picker.Item label="3" value={3} />
-                        <Picker.Item label="4" value={4} />
-                        <Picker.Item label="5" value={5} />
+                        <Picker.Item
+                          style={{color: setColor(theme, THEME.COLOR_RED)}}
+                          label="Choose one"
+                          value=""
+                        />
+                        <Picker.Item
+                          style={{color: setColor(theme, THEME.COLOR_RED)}}
+                          label="1"
+                          value={1}
+                        />
+                        <Picker.Item
+                          style={{color: setColor(theme, THEME.COLOR_RED)}}
+                          label="2"
+                          value={2}
+                        />
+                        <Picker.Item
+                          style={{color: setColor(theme, THEME.COLOR_RED)}}
+                          label="3"
+                          value={3}
+                        />
+                        <Picker.Item
+                          style={{color: setColor(theme, THEME.COLOR_RED)}}
+                          label="4"
+                          value={4}
+                        />
+                        <Picker.Item
+                          style={{color: setColor(theme, THEME.COLOR_RED)}}
+                          label="5"
+                          value={5}
+                        />
                       </Picker>
                     </View>
                     {errors.rating && touched.rating && (
@@ -219,12 +252,14 @@ export const Edit: React.FC = () => {
                   <Typography.Description>Time:</Typography.Description>
                   <View style={{position: 'relative'}}>
                     <TextInput
+                      placeholderTextColor={setColor(theme)}
                       style={{
                         ...styles.textInput,
+                        color: setColor(theme),
                         borderBottomColor:
                           errors.time && touched.time
                             ? THEME.COLOR_RED
-                            : THEME.COLOR_GRAY,
+                            : setColor(theme),
                       }}
                       value={values.time}
                       onChangeText={handleChange('time')}
@@ -249,7 +284,7 @@ export const Edit: React.FC = () => {
                     Date of creation:
                   </Typography.Description>
                   <View style={{position: 'relative'}}>
-                    <View style={{width: 300}}>
+                    <View style={{minWidth: '100%'}}>
                       <View style={styles.dateInput}>
                         <UI.Button
                           name="calendar-outline"

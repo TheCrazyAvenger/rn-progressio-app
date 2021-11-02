@@ -8,7 +8,6 @@ export const styles = StyleSheet.create({
     minWidth: '100%',
   },
   title: {
-    paddingBottom: 5,
     marginBottom: 10,
   },
   calendar: {

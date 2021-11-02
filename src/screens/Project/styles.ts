@@ -22,9 +22,6 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
-  infoText: {
-    color: THEME.COLOR_GRAY,
-  },
   infoInner: {
     flexDirection: 'row',
     alignItems: 'center',

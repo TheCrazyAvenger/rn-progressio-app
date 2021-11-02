@@ -3,14 +3,9 @@ import {THEME} from '../../theme';
 
 export const styles = StyleSheet.create({
   tabStyle: {
-    backgroundColor: THEME.COLOR_WHITE,
     height: 70,
   },
-  headerStyle: {
-    backgroundColor: THEME.COLOR_WHITE,
-  },
   titleStyle: {
-    color: THEME.COLOR_GRAY,
     fontSize: 20,
   },
   addButton: {

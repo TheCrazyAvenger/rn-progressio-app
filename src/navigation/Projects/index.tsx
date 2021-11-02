@@ -4,21 +4,37 @@ import {styles} from './styles';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {THEME} from '../../theme';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {setColor} from '../../utilities/utilities';
+import {useAppSelector} from '../../store/hooks';
 
 const Main = createNativeStackNavigator();
 const Books = createNativeStackNavigator();
 const TopTabs = createMaterialTopTabNavigator();
 
 export const Bookmarks: React.FC = () => {
+  const theme = useAppSelector(state => state.theme.theme);
   return (
     <Books.Navigator
       screenOptions={{
-        headerTitleStyle: styles.titleStyle,
+        headerTitleStyle: {...styles.titleStyle, color: setColor(theme)},
         headerShadowVisible: false,
       }}>
       <Books.Screen
         name="Books"
-        options={{title: 'Bookmarks'}}
+        options={{
+          title: 'Bookmarks',
+          headerLeft: () => {
+            return (
+              <Icon
+                name="bookmarks"
+                size={23}
+                style={{marginRight: 5}}
+                color={THEME.COLOR_RED}
+              />
+            );
+          },
+        }}
         component={Screens.Bookmarks}
       />
       <Books.Screen
@@ -44,7 +60,19 @@ export const Projects: React.FC = () => {
       }}>
       <Main.Screen
         name="Main"
-        options={{title: 'Progressio'}}
+        options={{
+          title: 'Progressio',
+          headerLeft: () => {
+            return (
+              <Icon
+                name="brush"
+                size={23}
+                style={{marginRight: 5}}
+                color={THEME.COLOR_RED}
+              />
+            );
+          },
+        }}
         component={Screens.Main}
       />
       <Main.Screen

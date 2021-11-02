@@ -5,19 +5,21 @@ import {TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Screens} from '../../screens';
 import {styles} from './styles';
-import {Bookmarks, TopNavigator} from '../Projects';
+import {TopNavigator} from '../Projects';
 import {useNavigation} from '@react-navigation/core';
+import {useAppSelector} from '../../store/hooks';
+import {setColor} from '../../utilities/utilities';
 
 const Tab = createBottomTabNavigator();
 
 export const BottomTabs: React.FC = () => {
   const navigation: any = useNavigation();
+  const theme = useAppSelector(state => state.theme.theme);
 
   return (
     <Tab.Navigator
       screenOptions={{
-        headerStyle: styles.headerStyle,
-        headerTitleStyle: styles.titleStyle,
+        headerTitleStyle: {...styles.titleStyle, color: setColor(theme)},
         tabBarShowLabel: false,
         tabBarStyle: styles.tabStyle,
       }}>
@@ -30,11 +32,11 @@ export const BottomTabs: React.FC = () => {
             return (
               <TouchableOpacity
                 activeOpacity={0.5}
-                onPress={() => navigation.navigate('MainScreen')}>
+                onPress={() => navigation.navigate('Main')}>
                 <Icon
                   name="home"
                   size={focused ? 30 : 25}
-                  color={focused ? THEME.COLOR_RED : THEME.COLOR_GRAY}
+                  color={focused ? THEME.COLOR_RED : setColor(theme)}
                 />
               </TouchableOpacity>
             );
@@ -45,6 +47,16 @@ export const BottomTabs: React.FC = () => {
       <Tab.Screen
         name="Analytics"
         options={{
+          headerLeft: () => {
+            return (
+              <Icon
+                name="analytics"
+                size={25}
+                style={{marginLeft: 20, marginRight: -10}}
+                color={THEME.COLOR_RED}
+              />
+            );
+          },
           tabBarIcon: ({focused}) => {
             return (
               <TouchableOpacity
@@ -53,7 +65,7 @@ export const BottomTabs: React.FC = () => {
                 <Icon
                   name="analytics"
                   size={focused ? 30 : 25}
-                  color={focused ? THEME.COLOR_RED : THEME.COLOR_GRAY}
+                  color={focused ? THEME.COLOR_RED : setColor(theme)}
                 />
               </TouchableOpacity>
             );
@@ -64,6 +76,16 @@ export const BottomTabs: React.FC = () => {
       <Tab.Screen
         name="Settings"
         options={{
+          headerLeft: () => {
+            return (
+              <Icon
+                name="settings"
+                size={25}
+                style={{marginLeft: 20, marginRight: -10}}
+                color={THEME.COLOR_RED}
+              />
+            );
+          },
           tabBarIcon: ({focused}) => {
             return (
               <TouchableOpacity
@@ -72,7 +94,7 @@ export const BottomTabs: React.FC = () => {
                 <Icon
                   name="settings"
                   size={focused ? 30 : 25}
-                  color={focused ? THEME.COLOR_RED : THEME.COLOR_GRAY}
+                  color={focused ? THEME.COLOR_RED : setColor(theme)}
                 />
               </TouchableOpacity>
             );

@@ -45,11 +45,9 @@ export const Project: React.FC = () => {
     return data.info.map((item: IRengerInfo, i: number) => {
       return (
         <View style={styles.renderInfo} key={i}>
-          <Typography.H2 style={styles.infoText}>{item.name}</Typography.H2>
+          <Typography.H2>{item.name}</Typography.H2>
           <View style={styles.infoInner}>
-            <Typography.Description style={styles.infoText}>
-              {item.value}
-            </Typography.Description>
+            <Typography.Description>{item.value}</Typography.Description>
             {item.type ? (
               <Typography.Description>{item.type}</Typography.Description>
             ) : null}

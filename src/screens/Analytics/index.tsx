@@ -3,7 +3,7 @@ import {UI} from '../../ui';
 import {LineChart, ProgressChart} from 'react-native-chart-kit';
 import {styles} from './styles';
 import {Typography} from '../../components/Typography';
-import {Alert, Dimensions, Modal, Pressable, View} from 'react-native';
+import {Alert, Dimensions, Modal, View} from 'react-native';
 import {useAppDispatch, useAppSelector} from '../../store/hooks';
 import {Forms} from '../../forms';
 import {THEME} from '../../theme';

@@ -8,7 +8,6 @@ export const styles = StyleSheet.create({
     fontFamily: 'Lato-Bold',
   },
   titleStyle: {
-    color: THEME.COLOR_GRAY,
     fontSize: 20,
   },
 });

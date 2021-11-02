@@ -11,7 +11,6 @@ export const styles = StyleSheet.create({
     overflow: 'hidden',
     padding: 15,
     alignItems: 'center',
-    backgroundColor: THEME.COLOR_WHITE,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
