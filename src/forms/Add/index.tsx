@@ -38,7 +38,7 @@ export const Add: React.FC = () => {
       ],
     };
     dispatch(addProject(project));
-    navigation.navigate('Progressio');
+    navigation.navigate('Main');
   };
 
   const showDatePicker = () => {

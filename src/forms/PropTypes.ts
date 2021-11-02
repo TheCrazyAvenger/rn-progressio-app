@@ -7,3 +7,9 @@ export interface IValues {
   time: string;
   category: string;
 }
+
+export type GoalFormTypes = {
+  callback?: any;
+  type?: 'Modal';
+  placeholder?: string;
+};

@@ -29,7 +29,7 @@ export const Project: React.FC = () => {
           text: 'OK',
           onPress: () => {
             dispatch(removeProject(data.id));
-            navigation.navigate('Progressio');
+            navigation.navigate('Main');
           },
         },
       ],

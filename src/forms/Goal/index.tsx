@@ -1,21 +1,25 @@
 import {useNavigation, useRoute} from '@react-navigation/core';
 import {Formik} from 'formik';
-import React, {useState} from 'react';
+import React from 'react';
 import {Text, View, TextInput} from 'react-native';
-import {Typography} from '../../components/Typography';
 import {THEME} from '../../theme';
-import {goalSchema} from '..';
+import {GoalFormTypes, goalSchema} from '..';
 import {styles} from './styles';
 import {useAppDispatch} from '../../store/hooks';
 import {UI} from '../../ui';
 import {setGoal} from '../../store/slices/addSlice';
 
-export const Goal: React.FC = () => {
+export const Goal: React.FC<GoalFormTypes> = ({
+  callback,
+  type,
+  placeholder,
+}) => {
   const navigation: any = useNavigation();
   const route: any = useRoute();
   const dispatch = useAppDispatch();
 
   const updateGoal = (goal: number) => {
+    if (type === 'Modal') callback();
     dispatch(setGoal(goal));
   };
 
@@ -51,7 +55,7 @@ export const Goal: React.FC = () => {
                   value={values.goal}
                   onChangeText={handleChange('goal')}
                   onBlur={() => setFieldTouched('goal')}
-                  placeholder="Add a goal"
+                  placeholder={placeholder}
                 />
                 {errors.goal && touched.goal && (
                   <Text
@@ -77,6 +81,16 @@ export const Goal: React.FC = () => {
                 disabled={!isValid}
                 callback={handleSubmit}
               />
+              {callback && (
+                <UI.Button
+                  color={THEME.COLOR_WHITE}
+                  style={{
+                    marginLeft: 15,
+                  }}
+                  name="close-outline"
+                  callback={callback}
+                />
+              )}
             </View>
           </UI.Block>
         );

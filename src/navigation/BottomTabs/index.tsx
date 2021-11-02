@@ -5,7 +5,7 @@ import {TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Screens} from '../../screens';
 import {styles} from './styles';
-import {Bookmarks, Projects} from '../Projects';
+import {Bookmarks, TopNavigator} from '../Projects';
 import {useNavigation} from '@react-navigation/core';
 
 const Tab = createBottomTabNavigator();
@@ -22,14 +22,15 @@ export const BottomTabs: React.FC = () => {
         tabBarStyle: styles.tabStyle,
       }}>
       <Tab.Screen
-        name="Main"
+        name="MainScreen"
         options={{
+          title: 'Prgressio',
           headerShown: false,
           tabBarIcon: ({focused}) => {
             return (
               <TouchableOpacity
                 activeOpacity={0.5}
-                onPress={() => navigation.navigate('Progressio')}>
+                onPress={() => navigation.navigate('MainScreen')}>
                 <Icon
                   name="home"
                   size={focused ? 30 : 25}
@@ -39,27 +40,7 @@ export const BottomTabs: React.FC = () => {
             );
           },
         }}
-        component={Projects}
-      />
-      <Tab.Screen
-        name="Bookmarks"
-        options={{
-          headerShown: false,
-          tabBarIcon: ({focused}) => {
-            return (
-              <TouchableOpacity
-                activeOpacity={0.5}
-                onPress={() => navigation.navigate('Bookmarks')}>
-                <Icon
-                  name="bookmarks"
-                  size={focused ? 30 : 25}
-                  color={focused ? THEME.COLOR_RED : THEME.COLOR_GRAY}
-                />
-              </TouchableOpacity>
-            );
-          },
-        }}
-        component={Bookmarks}
+        component={TopNavigator}
       />
       <Tab.Screen
         name="Analytics"

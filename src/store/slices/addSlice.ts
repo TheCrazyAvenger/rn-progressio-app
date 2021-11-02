@@ -36,7 +36,7 @@ const saveProjects = async (data: any) => {
   }
 };
 
-const saveGoal = async (goal: number) => {
+const saveGoal = async (goal: number | null) => {
   try {
     await AsyncStorage.setItem('goal', JSON.stringify(goal));
   } catch (e) {
@@ -53,14 +53,13 @@ export const addSlice = createSlice({
 
       saveProjects(state.projects);
     },
-    toogleBookmarks: (state, action: PayloadAction<number>) =>
-      void state.projects.map((item: any) => {
-        if (item.id === action.payload) {
-          item.booked = !item.booked;
-          state.bookmarks = state.projects.filter((item: any) => item.booked);
-        }
-        saveProjects(state.projects);
-      }),
+    toogleBookmarks: (state, action: PayloadAction<number>) => {
+      const id = action.payload - 1;
+      state.projects[id].booked = !state.projects[id].booked;
+      state.bookmarks = state.projects.filter((item: any) => item.booked);
+
+      saveProjects(state.projects);
+    },
     removeProject: (state, action: PayloadAction<number>) => {
       state.projects = state.projects.filter(
         (item: any) => item.id !== action.payload,
@@ -85,7 +84,7 @@ export const addSlice = createSlice({
       });
       saveProjects(state.projects);
     },
-    setGoal: (state, action: PayloadAction<number>) => {
+    setGoal: (state, action: PayloadAction<number | null>) => {
       state.goal = action.payload;
       saveGoal(action.payload);
     },

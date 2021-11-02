@@ -12,4 +12,16 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     elevation: 4,
   },
+  buttons: {
+    flexDirection: 'row',
+  },
+  button: {
+    marginHorizontal: 10,
+  },
+  modal: {
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
