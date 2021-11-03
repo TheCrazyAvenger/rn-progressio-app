@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    marginBottom: 10,
+    marginBottom: 15,
   },
   logoView: {
     width: 40,
@@ -26,8 +26,8 @@ export const styles = StyleSheet.create({
     borderRadius: 50,
     resizeMode: 'cover',
   },
-  picker: {
-    minWidth: '40%',
+  language: {
+    flexDirection: 'row',
   },
   additional: {
     flexDirection: 'row',

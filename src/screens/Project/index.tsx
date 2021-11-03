@@ -1,4 +1,5 @@
 import {useNavigation, useRoute} from '@react-navigation/core';
+import I18n from 'i18n-js';
 import React, {useMemo} from 'react';
 import {Alert, Image, View} from 'react-native';
 import {IRengerInfo} from '..';
@@ -17,23 +18,19 @@ export const Project: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const deleteHandler = () =>
-    Alert.alert(
-      'Deleting a project...',
-      'Are you sure you want to delete it?',
-      [
-        {
-          text: 'Cancel',
-          style: 'cancel',
+    Alert.alert(I18n.t('alertTitle'), I18n.t('alertMessage'), [
+      {
+        text: I18n.t('cancelButton'),
+        style: 'cancel',
+      },
+      {
+        text: I18n.t('okButton'),
+        onPress: () => {
+          dispatch(removeProject(data.id));
+          navigation.navigate('Main');
         },
-        {
-          text: 'OK',
-          onPress: () => {
-            dispatch(removeProject(data.id));
-            navigation.navigate('Main');
-          },
-        },
-      ],
-    );
+      },
+    ]);
 
   const editHandler = () => {
     navigation.navigate('Edit', {
@@ -45,7 +42,7 @@ export const Project: React.FC = () => {
     return data.info.map((item: IRengerInfo, i: number) => {
       return (
         <View style={styles.renderInfo} key={i}>
-          <Typography.H2>{item.name}</Typography.H2>
+          <Typography.H2>{I18n.t(item.name)}</Typography.H2>
           <View style={styles.infoInner}>
             <Typography.Description>{item.value}</Typography.Description>
             {item.type ? (
@@ -71,21 +68,27 @@ export const Project: React.FC = () => {
         <Typography.Title style={styles.title}>{data.name}</Typography.Title>
         <Typography.Description style={{marginBottom: 15}}>
           <Typography.Title style={{fontSize: 18}}>
-            Description:
+            {I18n.t('description')}:
           </Typography.Title>{' '}
           {data.description}
         </Typography.Description>
 
-        <Typography.Subtitle>Created: {data.date}</Typography.Subtitle>
+        <Typography.Subtitle>
+          {I18n.t('created')}: {data.date}
+        </Typography.Subtitle>
       </UI.Block>
 
       <UI.Block>
-        <Typography.Title style={styles.title}>Info</Typography.Title>
+        <Typography.Title style={styles.title}>
+          {I18n.t('info')}
+        </Typography.Title>
         <View style={styles.info}>{renderInfo}</View>
       </UI.Block>
 
       <UI.Block>
-        <Typography.Title style={styles.title}>Actions</Typography.Title>
+        <Typography.Title style={styles.title}>
+          {I18n.t('actions')}
+        </Typography.Title>
         <View style={styles.buttons}>
           <UI.Button
             name="pencil-outline"

@@ -3,6 +3,7 @@ import {Text} from 'react-native-paper';
 import {TypographyProps} from '..';
 import {useAppSelector} from '../../../store/hooks';
 import {THEME} from '../../../theme';
+import {setColor} from '../../../utilities/utilities';
 import {styles} from './styles';
 
 export const Subtitle: React.FC<TypographyProps> = ({children, style}) => {
@@ -11,7 +12,7 @@ export const Subtitle: React.FC<TypographyProps> = ({children, style}) => {
     <Text
       style={{
         ...styles.default,
-        color: theme === 'dark' ? THEME.COLOR_WHITE : THEME.COLOR_GRAY,
+        color: setColor(theme),
         ...style,
       }}>
       {children}

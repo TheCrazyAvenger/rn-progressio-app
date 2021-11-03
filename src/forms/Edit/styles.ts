@@ -7,6 +7,11 @@ export const styles = StyleSheet.create({
     marginBottom: 25,
     minWidth: '100%',
   },
+  rating: {
+    marginVertical: 15,
+    minWidth: '100%',
+    alignItems: 'flex-start',
+  },
   title: {
     paddingBottom: 5,
     marginBottom: 10,
@@ -18,6 +23,7 @@ export const styles = StyleSheet.create({
   dateInput: {
     flexDirection: 'row',
     alignItems: 'center',
+    minWidth: '100%',
   },
   date: {
     marginLeft: 20,

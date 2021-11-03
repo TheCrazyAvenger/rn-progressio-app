@@ -6,7 +6,7 @@ export const getTheme = createAsyncThunk('projects/getTheme', async () => {
     let theme = await AsyncStorage.getItem('theme');
 
     if (theme === null) {
-      return 'light';
+      return false;
     } else {
       return JSON.parse(theme);
     }

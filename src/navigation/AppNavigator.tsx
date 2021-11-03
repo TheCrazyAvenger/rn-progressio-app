@@ -25,7 +25,7 @@ const darkTheme = {
 export const AppNavigator: React.FC = () => {
   const theme = useAppSelector(state => state.theme.theme);
 
-  const myTheme = theme === 'dark' ? darkTheme : defaultTheme;
+  const myTheme = theme ? darkTheme : defaultTheme;
 
   return (
     <NavigationContainer theme={myTheme}>

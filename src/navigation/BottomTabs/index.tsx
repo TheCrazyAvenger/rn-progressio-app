@@ -9,6 +9,7 @@ import {TopNavigator} from '../Projects';
 import {useNavigation} from '@react-navigation/core';
 import {useAppSelector} from '../../store/hooks';
 import {setColor} from '../../utilities/utilities';
+import I18n from 'i18n-js';
 
 const Tab = createBottomTabNavigator();
 
@@ -47,6 +48,7 @@ export const BottomTabs: React.FC = () => {
       <Tab.Screen
         name="Analytics"
         options={{
+          title: I18n.t('analytics'),
           headerLeft: () => {
             return (
               <Icon
@@ -76,6 +78,7 @@ export const BottomTabs: React.FC = () => {
       <Tab.Screen
         name="Settings"
         options={{
+          title: I18n.t('settings'),
           headerLeft: () => {
             return (
               <Icon

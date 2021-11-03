@@ -8,6 +8,8 @@ import {useAppDispatch, useAppSelector} from '../../store/hooks';
 import {Forms} from '../../forms';
 import {THEME} from '../../theme';
 import {setGoal} from '../../store/slices/addSlice';
+import I18n from 'i18n-js';
+import {EmptyList} from '../../components/EmptyList';
 
 export const Analytics: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -16,7 +18,7 @@ export const Analytics: React.FC = () => {
   const goal = useAppSelector(state => state.projects.goal);
   const dispatch = useAppDispatch();
 
-  const currentMonth = new Date('11/01/21').getMonth();
+  const currentMonth = new Date().getMonth();
 
   const lastProjects = projects.slice(-5);
   const namesArr: Array<string> = [];
@@ -39,20 +41,25 @@ export const Analytics: React.FC = () => {
   });
 
   const deleteHandler = () =>
-    Alert.alert('Deleting a goal...', 'Are you sure you want to delete it?', [
+    Alert.alert(I18n.t('alertAnalytics'), I18n.t('messageAnalytics'), [
       {
-        text: 'Cancel',
+        text: I18n.t('cancelButton'),
         style: 'cancel',
       },
       {
-        text: 'OK',
+        text: I18n.t('okButton'),
         onPress: () => {
           dispatch(setGoal(null));
         },
       },
     ]);
 
-  return (
+  return projects.length < 2 ? (
+    <EmptyList
+      title={I18n.t('emptyTitle')}
+      description={I18n.t('emptyDescription')}
+    />
+  ) : (
     <UI.Root>
       <Modal
         animationType="slide"
@@ -63,7 +70,7 @@ export const Analytics: React.FC = () => {
         }}>
         <UI.Root type="View" style={styles.modal}>
           <Forms.Goal
-            placeholder="Edit goal"
+            placeholder={I18n.t('plEditGoal')}
             type="Modal"
             callback={() => setModalVisible(!modalVisible)}
           />
@@ -71,7 +78,7 @@ export const Analytics: React.FC = () => {
       </Modal>
       <UI.Block>
         <Typography.Title>
-          Goal this month {goal && `(${monthValue} / ${goal})`}
+          {I18n.t('goal')} {goal && `(${monthValue} / ${goal})`}
         </Typography.Title>
       </UI.Block>
 
@@ -80,7 +87,7 @@ export const Analytics: React.FC = () => {
           <UI.Block style={{padding: 0}}>
             <ProgressChart
               data={{
-                labels: ['Prev', 'Now'],
+                labels: [I18n.t('prev'), I18n.t('now')],
 
                 data: [
                   prevMonthValue > goal ? 1 : prevMonthValue / goal,
@@ -117,11 +124,11 @@ export const Analytics: React.FC = () => {
           </UI.Block>
         </>
       ) : (
-        <Forms.Goal placeholder="Add a goal" />
+        <Forms.Goal placeholder={I18n.t('plGoal')} />
       )}
 
       <UI.Block>
-        <Typography.Title>Time spent</Typography.Title>
+        <Typography.Title>{I18n.t('timeSpent')}</Typography.Title>
       </UI.Block>
 
       <UI.Block style={{padding: 0}}>
@@ -159,7 +166,7 @@ export const Analytics: React.FC = () => {
       </UI.Block>
 
       <UI.Block>
-        <Typography.Title>Rating</Typography.Title>
+        <Typography.Title>{I18n.t('rating')}</Typography.Title>
       </UI.Block>
 
       <UI.Block style={{padding: 0}}>
@@ -175,7 +182,7 @@ export const Analytics: React.FC = () => {
           width={Dimensions.get('window').width}
           height={230}
           yAxisLabel=""
-          yAxisSuffix="/5"
+          yAxisSuffix="/10"
           yAxisInterval={1}
           chartConfig={{
             backgroundColor: '#a52af7',
@@ -197,13 +204,13 @@ export const Analytics: React.FC = () => {
       </UI.Block>
 
       <UI.Block>
-        <Typography.Title>Uploads</Typography.Title>
+        <Typography.Title>{I18n.t('uploads')}</Typography.Title>
       </UI.Block>
 
       <UI.Block style={{padding: 0}}>
         <LineChart
           data={{
-            labels: ['', 'Prev month', 'This month'],
+            labels: ['', I18n.t('prevMonth'), I18n.t('thisMonth')],
             datasets: [
               {
                 data: [0, prevMonthValue, monthValue],

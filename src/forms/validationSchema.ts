@@ -1,32 +1,30 @@
+import I18n from 'i18n-js';
 import * as yup from 'yup';
 
 export let schema = yup.object().shape({
   name: yup
     .string()
-    .required('Name is required')
-    .min(3, 'At least 3 letters')
-    .matches(/^[a-zA-Z ]+$/, {message: 'Use only letters'})
-    .max(16, 'Only 16 letters'),
+    .required(I18n.t('scName'))
+    .min(3, I18n.t('scMin'))
+    .matches(/^[a-zA-Z ]+$/, {message: I18n.t('scMatches')})
+    .max(12, I18n.t('scMax')),
   description: yup
     .string()
-    .required('Description is required')
-    .min(3, 'At least 3 letters')
-    .matches(/^[a-zA-Z ',.?""''!]+$/, {message: 'Use only letters'}),
+    .required(I18n.t('scDescription'))
+    .min(3, I18n.t('scMin'))
+    .matches(/^[a-zA-Z ',.?""''!]+$/, {message: I18n.t('scMatches')}),
   category: yup
     .string()
-    .required('Category is required')
-    .min(3, 'At least 3 letters')
-    .matches(/^[a-zA-Z ]+$/, {message: 'Use only letters'})
-    .max(16, 'Only 16 letters'),
-  rating: yup.number().required('Choose one'),
-  time: yup.number().required('Time is required').max(999, `It's too much`),
-  date: yup.string().required('Choose date'),
-  path: yup.string().required('Add a photo'),
+    .required(I18n.t('scCategory'))
+    .min(3, I18n.t('scMin'))
+    .matches(/^[a-zA-Z ]+$/, {message: I18n.t('scMatches')})
+    .max(12, 'Only 12 letters'),
+  rating: yup.number().required(I18n.t('scRating')),
+  time: yup.number().required(I18n.t('scTime')).max(999, I18n.t('scTimeMax')),
+  date: yup.string().required(I18n.t('scDate')),
+  path: yup.string().required(I18n.t('scPhoto')),
 });
 
 export let goalSchema = yup.object().shape({
-  goal: yup
-    .number()
-    .required('Goal is required')
-    .max(100, '100 is quiet enough'),
+  goal: yup.number().required(I18n.t('scGoal')).max(100, I18n.t('scGoalMax')),
 });

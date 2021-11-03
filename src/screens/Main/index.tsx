@@ -8,6 +8,7 @@ import {useNavigation} from '@react-navigation/core';
 import {IProject, Screens} from '..';
 import {getGoal, getProjects} from '../../store/actions/projects';
 import {getTheme} from '../../store/actions/theme';
+import I18n from 'i18n-js';
 
 export const Main: React.FC = () => {
   const projects = useAppSelector(state => state.projects.projects);
@@ -35,7 +36,7 @@ export const Main: React.FC = () => {
     if (!!projects[0]) {
       return <UI.Root>{renderProjects}</UI.Root>;
     } else {
-      return <Components.EmptyList />;
+      return <Components.EmptyList title={I18n.t('empty')} />;
     }
   };
 

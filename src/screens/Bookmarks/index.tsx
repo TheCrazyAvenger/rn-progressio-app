@@ -1,3 +1,4 @@
+import I18n from 'i18n-js';
 import React, {useMemo} from 'react';
 import {IProject} from '..';
 import {Components} from '../../components';
@@ -17,7 +18,7 @@ export const Bookmarks: React.FC = () => {
     if (!!bookmarks[0]) {
       return <UI.Root>{renderBookmarks}</UI.Root>;
     } else {
-      return <Components.EmptyList />;
+      return <Components.EmptyList title={I18n.t('empty')} />;
     }
   };
 

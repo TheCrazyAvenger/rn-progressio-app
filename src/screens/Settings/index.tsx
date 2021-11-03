@@ -1,91 +1,61 @@
-import {Picker} from '@react-native-picker/picker';
 import React, {useState} from 'react';
+import {styles} from './styles';
 import {View} from 'react-native';
+import {Switch, Avatar} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Typography} from '../../components/Typography';
-import {THEME} from '../../theme';
 import {UI} from '../../ui';
-import {Avatar} from 'react-native-elements';
-
-import {styles} from './styles';
+import {THEME} from '../../theme';
 import {changeTheme} from '../../store/slices/themeSlice';
 import {useAppDispatch, useAppSelector} from '../../store/hooks';
-import {setColor} from '../../utilities/utilities';
+import I18n from 'i18n-js';
 
 export const Settings: React.FC = () => {
   const appTheme = useAppSelector(state => state.theme.theme);
-  const [theme, setTheme] = useState<string>(appTheme);
+  const [theme, setTheme] = useState<boolean>(appTheme);
 
   const dispatch = useAppDispatch();
 
   return (
     <UI.Root>
       <UI.Block>
-        <Typography.Title style={styles.title}>Account</Typography.Title>
+        <Typography.Title style={styles.title}>
+          {I18n.t('account')}
+        </Typography.Title>
         <View style={styles.block}>
-          <Typography.Description>SignUp/SignIn</Typography.Description>
-          <Avatar rounded source={require('../../../assets/images/1.jpg')} />
+          <Typography.Description>{I18n.t('sign')}</Typography.Description>
+          <Avatar.Image
+            size={35}
+            source={require('../../../assets/images/1.jpg')}
+          />
         </View>
       </UI.Block>
       <UI.Block>
-        <Typography.Title style={styles.title}>Common</Typography.Title>
+        <Typography.Title style={styles.title}>
+          {I18n.t('common')}
+        </Typography.Title>
         <View style={styles.block}>
-          <Typography.Description>Theme</Typography.Description>
-          <View style={styles.picker}>
-            <Picker
-              style={{
-                width: '100%',
+          <Typography.Description>{I18n.t('darkMode')}</Typography.Description>
+
+          <View>
+            <Switch
+              color={THEME.COLOR_RED}
+              onValueChange={() => {
+                setTheme(prev => !prev);
+                dispatch(changeTheme());
               }}
-              dropdownIconColor={setColor(theme)}
-              mode="dropdown"
-              selectedValue={theme}
-              onValueChange={itemValue => {
-                setTheme(itemValue);
-                dispatch(changeTheme(itemValue));
-              }}>
-              <Picker.Item
-                style={{color: setColor(theme, THEME.COLOR_RED)}}
-                label="Light"
-                value={'light'}
-              />
-              <Picker.Item
-                style={{color: setColor(theme, THEME.COLOR_RED)}}
-                label="Dark"
-                value={'dark'}
-              />
-            </Picker>
-          </View>
-        </View>
-        <View style={styles.block}>
-          <Typography.Description>Language</Typography.Description>
-          <View style={styles.picker}>
-            <Picker
-              style={{
-                width: '100%',
-              }}
-              dropdownIconColor={setColor(theme)}
-              mode="dropdown"
-              selectedValue={theme}
-              onValueChange={itemValue => {}}>
-              <Picker.Item
-                style={{color: setColor(theme, THEME.COLOR_RED)}}
-                label="English"
-                value={'en'}
-              />
-              <Picker.Item
-                style={{color: setColor(theme, THEME.COLOR_RED)}}
-                label="Russian"
-                value={'ru'}
-              />
-            </Picker>
+              value={theme}
+            />
           </View>
         </View>
       </UI.Block>
 
       <UI.Block>
-        <Typography.Title style={styles.title}>Additional</Typography.Title>
+        <Typography.Title style={styles.title}>
+          {I18n.t('additional')}
+        </Typography.Title>
         <View style={{...styles.block, marginBottom: 15}}>
-          <Typography.Description>Import data</Typography.Description>
+          <Typography.Description>{I18n.t('import')}</Typography.Description>
           <View style={styles.logoView}>
             <Icon
               name="arrow-down-outline"
@@ -95,14 +65,16 @@ export const Settings: React.FC = () => {
           </View>
         </View>
         <View style={styles.block}>
-          <Typography.Description>Export data</Typography.Description>
+          <Typography.Description>{I18n.t('export')}</Typography.Description>
           <View style={styles.logoView}>
             <Icon name="arrow-up-outline" color={THEME.COLOR_WHITE} size={25} />
           </View>
         </View>
       </UI.Block>
       <UI.Block>
-        <Typography.Title style={styles.title}>About</Typography.Title>
+        <Typography.Title style={styles.title}>
+          {I18n.t('about')}
+        </Typography.Title>
         <View style={{...styles.block, marginBottom: 15}}>
           <View style={styles.additional}>
             <Icon
@@ -114,10 +86,10 @@ export const Settings: React.FC = () => {
             <Typography.H2>Progressio</Typography.H2>
           </View>
           <Typography.Description>
-            Version: <Typography.H2>0.0.1</Typography.H2>
+            {I18n.t('version')}: <Typography.H2>0.0.1</Typography.H2>
           </Typography.Description>
         </View>
-        <Typography.Description>Progressio app 2021</Typography.Description>
+        <Typography.Subtitle>Progressio app 2021</Typography.Subtitle>
       </UI.Block>
     </UI.Root>
   );

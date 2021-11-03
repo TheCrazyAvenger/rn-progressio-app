@@ -1,21 +1,20 @@
-import {useNavigation, useRoute} from '@react-navigation/core';
 import {Formik} from 'formik';
 import React from 'react';
 import {Text, View, TextInput} from 'react-native';
 import {THEME} from '../../theme';
 import {GoalFormTypes, goalSchema} from '..';
 import {styles} from './styles';
-import {useAppDispatch} from '../../store/hooks';
+import {useAppDispatch, useAppSelector} from '../../store/hooks';
 import {UI} from '../../ui';
 import {setGoal} from '../../store/slices/addSlice';
+import {setColor} from '../../utilities/utilities';
 
 export const Goal: React.FC<GoalFormTypes> = ({
   callback,
   type,
   placeholder,
 }) => {
-  const navigation: any = useNavigation();
-  const route: any = useRoute();
+  const theme = useAppSelector(state => state.theme.theme);
   const dispatch = useAppDispatch();
 
   const updateGoal = (goal: number) => {
@@ -45,12 +44,14 @@ export const Goal: React.FC<GoalFormTypes> = ({
               <View style={{position: 'relative'}}>
                 <TextInput
                   keyboardType={'number-pad'}
+                  placeholderTextColor={setColor(theme)}
                   style={{
                     ...styles.textInput,
+                    color: setColor(theme),
                     borderBottomColor:
                       errors.goal && touched.goal
                         ? THEME.COLOR_RED
-                        : THEME.COLOR_GRAY,
+                        : setColor(theme),
                   }}
                   value={values.goal}
                   onChangeText={handleChange('goal')}

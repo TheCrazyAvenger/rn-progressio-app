@@ -1,17 +1,16 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {getGoal, getProjects} from '../actions/projects';
 import {getTheme} from '../actions/theme';
 
 export interface ThemeState {
-  theme: string;
+  theme: boolean;
 }
 
 const initialState: ThemeState = {
-  theme: 'light',
+  theme: false,
 };
 
-const saveTheme = async (theme: string) => {
+const saveTheme = async (theme: boolean) => {
   try {
     await AsyncStorage.setItem('theme', JSON.stringify(theme));
   } catch (e) {
@@ -23,15 +22,15 @@ export const themeSlice = createSlice({
   name: 'theme',
   initialState,
   reducers: {
-    changeTheme: (state, action: PayloadAction<string>) => {
-      state.theme = action.payload;
+    changeTheme: state => {
+      state.theme = !state.theme;
       saveTheme(state.theme);
     },
   },
   extraReducers: builder => {
     builder.addCase(
       getTheme.fulfilled,
-      (state, action: PayloadAction<string>) => {
+      (state, action: PayloadAction<boolean>) => {
         state.theme = action.payload;
       },
     );

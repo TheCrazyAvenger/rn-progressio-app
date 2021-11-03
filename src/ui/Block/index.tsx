@@ -15,7 +15,7 @@ export const Block: React.FC<BlockTypes> = ({style, children}) => {
     <View
       style={{
         ...styles.block,
-        backgroundColor: theme === 'dark' ? '#191919' : THEME.COLOR_WHITE,
+        backgroundColor: theme ? '#191919' : THEME.COLOR_WHITE,
         ...style,
       }}>
       {children}

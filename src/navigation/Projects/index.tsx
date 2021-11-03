@@ -7,6 +7,7 @@ import {THEME} from '../../theme';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {setColor} from '../../utilities/utilities';
 import {useAppSelector} from '../../store/hooks';
+import I18n from 'i18n-js';
 
 const Main = createNativeStackNavigator();
 const Books = createNativeStackNavigator();
@@ -14,6 +15,7 @@ const TopTabs = createMaterialTopTabNavigator();
 
 export const Bookmarks: React.FC = () => {
   const theme = useAppSelector(state => state.theme.theme);
+
   return (
     <Books.Navigator
       screenOptions={{
@@ -23,7 +25,7 @@ export const Bookmarks: React.FC = () => {
       <Books.Screen
         name="Books"
         options={{
-          title: 'Bookmarks',
+          title: I18n.t('bookmarks'),
           headerLeft: () => {
             return (
               <Icon
@@ -39,12 +41,12 @@ export const Bookmarks: React.FC = () => {
       />
       <Books.Screen
         name="Project"
-        options={{title: 'Details'}}
+        options={{title: I18n.t('details')}}
         component={Screens.Project}
       />
       <Books.Screen
         name="Edit"
-        options={{title: 'Edit project'}}
+        options={{title: I18n.t('edit')}}
         component={Screens.Edit}
       />
     </Books.Navigator>
@@ -77,13 +79,19 @@ export const Projects: React.FC = () => {
       />
       <Main.Screen
         name="Project"
-        options={{title: 'Details'}}
+        options={{title: I18n.t('details')}}
         component={Screens.Project}
       />
-      <Main.Screen name="Add" component={Screens.Add} />
+      <Main.Screen
+        name="Add"
+        options={{
+          title: I18n.t('add'),
+        }}
+        component={Screens.Add}
+      />
       <Main.Screen
         name="Edit"
-        options={{title: 'Edit project'}}
+        options={{title: I18n.t('edit')}}
         component={Screens.Edit}
       />
     </Main.Navigator>
@@ -99,8 +107,20 @@ export const TopNavigator: React.FC = () => {
           backgroundColor: THEME.COLOR_RED,
         },
       }}>
-      <TopTabs.Screen name="Projects" component={Projects} />
-      <TopTabs.Screen name="Bookmarks" component={Bookmarks} />
+      <TopTabs.Screen
+        name="Projects"
+        options={{
+          title: I18n.t('projects'),
+        }}
+        component={Projects}
+      />
+      <TopTabs.Screen
+        name="Bookmarks"
+        options={{
+          title: I18n.t('bookmarks'),
+        }}
+        component={Bookmarks}
+      />
     </TopTabs.Navigator>
   );
 };
