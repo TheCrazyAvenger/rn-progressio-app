@@ -9,10 +9,20 @@ import {THEME} from '../../theme';
 import {changeTheme} from '../../store/slices/themeSlice';
 import {useAppDispatch, useAppSelector} from '../../store/hooks';
 import I18n from 'i18n-js';
+import {useNavigation} from '@react-navigation/core';
 
 export const Settings: React.FC = () => {
   const appTheme = useAppSelector(state => state.theme.theme);
+  const token = useAppSelector(state => state.auth.token);
+  const userData = useAppSelector(state => state.auth.userData);
   const [theme, setTheme] = useState<boolean>(appTheme);
+
+  console.log(token, userData);
+
+  const showProfile =
+    token && userData && token === userData.token ? true : false;
+
+  const navigation: any = useNavigation();
 
   const dispatch = useAppDispatch();
 
@@ -22,13 +32,26 @@ export const Settings: React.FC = () => {
         <Typography.Title style={styles.title}>
           {I18n.t('account')}
         </Typography.Title>
-        <View style={styles.block}>
-          <Typography.Description>{I18n.t('sign')}</Typography.Description>
-          <Avatar.Image
-            size={35}
-            source={require('../../../assets/images/1.jpg')}
-          />
-        </View>
+
+        {!showProfile ? (
+          <View style={styles.block}>
+            <UI.TextButton
+              title={I18n.t('sign')}
+              type="clear"
+              onPress={() => navigation.navigate('SignIn')}
+            />
+            <Avatar.Text
+              size={35}
+              label="?"
+              style={{backgroundColor: THEME.COLOR_RED}}
+            />
+          </View>
+        ) : (
+          <View style={{alignItems: 'flex-start', width: '100%'}}>
+            <Typography.H2>{userData.nickname}</Typography.H2>
+            <Typography.Subtitle>{userData.email}</Typography.Subtitle>
+          </View>
+        )}
       </UI.Block>
       <UI.Block>
         <Typography.Title style={styles.title}>

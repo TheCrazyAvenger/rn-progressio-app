@@ -1,7 +1,7 @@
 import {Formik} from 'formik';
 import React, {useState} from 'react';
-import {Image, Text, TextInput, View} from 'react-native';
-import {AirbnbRating, Rating} from 'react-native-elements';
+import {Image, View} from 'react-native';
+import {AirbnbRating} from 'react-native-elements';
 import {styles} from './styles';
 import {THEME} from '../../theme';
 import {Typography} from '../../components/Typography';

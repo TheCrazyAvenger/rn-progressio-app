@@ -9,6 +9,7 @@ import {IProject, Screens} from '..';
 import {getGoal, getProjects} from '../../store/actions/projects';
 import {getTheme} from '../../store/actions/theme';
 import I18n from 'i18n-js';
+import {getData} from '../../store/actions/auth';
 
 export const Main: React.FC = () => {
   const projects = useAppSelector(state => state.projects.projects);
@@ -20,6 +21,7 @@ export const Main: React.FC = () => {
     dispatch(getProjects());
     dispatch(getGoal());
     dispatch(getTheme());
+    dispatch(getData());
   }, []);
 
   const openAdd = () => {

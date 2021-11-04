@@ -54,10 +54,12 @@ export const Bookmarks: React.FC = () => {
 };
 
 export const Projects: React.FC = () => {
+  const theme = useAppSelector(state => state.theme.theme);
+
   return (
     <Main.Navigator
       screenOptions={{
-        headerTitleStyle: styles.titleStyle,
+        headerTitleStyle: {...styles.titleStyle, color: setColor(theme)},
         headerShadowVisible: false,
       }}>
       <Main.Screen

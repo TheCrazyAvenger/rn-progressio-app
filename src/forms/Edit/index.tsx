@@ -1,7 +1,7 @@
 import {useNavigation, useRoute} from '@react-navigation/core';
 import {Formik} from 'formik';
 import React, {useState} from 'react';
-import {Image, Text, View, TextInput} from 'react-native';
+import {Image, View} from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Typography} from '../../components/Typography';
@@ -11,7 +11,6 @@ import {launchCamera, openGallery, schema, IValues} from '..';
 import {styles} from './styles';
 import {useAppDispatch, useAppSelector} from '../../store/hooks';
 import {updateProject} from '../../store/slices/addSlice';
-import {setColor} from '../../utilities/utilities';
 import I18n from 'i18n-js';
 import {AirbnbRating} from 'react-native-elements';
 import {Components} from '../../components';
@@ -133,6 +132,7 @@ export const Edit: React.FC = () => {
                       showRating={false}
                       size={25}
                       onFinishRating={rating => {
+                        setSelectedRating(rating);
                         setFieldValue('rating', rating);
                       }}
                     />

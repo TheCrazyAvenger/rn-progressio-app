@@ -43,12 +43,21 @@ export const en = {
   about: 'About',
   version: 'Version',
 
+  //Login
+  signUpMessage: `Dont't have an account?`,
+  signInMessage: 'Already have an account?',
+  signUp: 'Sign up',
+  signIn: 'Sign in',
+  signTitle: 'Auth',
+
   //Forms
   addTitle1: 'Tell about your project',
   addTitle2: 'Add additional info',
   addTitle3: 'Add a photo',
   editTitle1: 'What would you like to edit?',
   editTitle2: 'Edit photo',
+  login: 'Login',
+  reg: 'Registration',
 
   //Form fileds
   name: 'Name',
@@ -57,6 +66,9 @@ export const en = {
   rating: 'Rating',
   time: 'Time',
   creationDate: 'Date of creation',
+  nickname: 'Nickname',
+  email: 'Email',
+  password: 'Password',
 
   //Placeholders
   plName: 'Name your project',
@@ -66,6 +78,9 @@ export const en = {
   plDate: 'Unknown',
   plGoal: 'Add a goal',
   plEditGoal: 'Edit goal',
+  plNickname: 'Enter nickname',
+  plEmail: 'Enter email',
+  plPassword: 'Enter password',
 
   //Schemas
   scName: 'Name is required',
@@ -81,6 +96,11 @@ export const en = {
   scPhoto: 'Add a photo',
   scGoal: 'Goal is required',
   scGoalMax: '100 is quiet enough',
+  scNickname: 'Nickname is required',
+  scEmail: 'Email is required',
+  scPassword: 'Password is required',
+  scPasswordMatches: 'Use only letters, numbers and symbols(such as %, #, @)',
+  scPasswordMin: 'Use at least 8 characters',
 };
 
 export const ru = {
@@ -127,12 +147,21 @@ export const ru = {
   about: 'О приложении',
   version: 'Версия',
 
+  //Login
+  signUpMessage: 'Нет аккаунта?',
+  signInMessage: 'Есть аккаунт?',
+  signUp: 'Регистрация',
+  signIn: 'Войти',
+  signTitle: 'Авторизация',
+
   //Forms
   addTitle1: 'Расскажите о проекте',
   addTitle2: 'Добавьте доп. информацию',
   addTitle3: 'Добавьте фото',
   editTitle1: 'Что вы хотите изменить?',
   editTitle2: 'Редактировать фото',
+  login: 'Вход',
+  reg: 'Регистрация',
 
   //Form fileds
   name: 'Название',
@@ -141,6 +170,9 @@ export const ru = {
   rating: 'Рейтинг',
   time: 'Время',
   creationDate: 'Дата создания',
+  nickname: 'Прозвище',
+  email: 'Почта',
+  password: 'Пароль',
 
   //Placeholders
   plName: 'Назовите свой проект',
@@ -150,6 +182,9 @@ export const ru = {
   plDate: 'Неизвестно',
   plGoal: 'Добавьте цель',
   plEditGoal: 'Измените цель',
+  plNickname: 'Введите прозвище',
+  plEmail: 'Введите почту',
+  plPassword: 'Введите пароль',
 
   //Schemas
   scName: 'Название обязательно',
@@ -165,4 +200,10 @@ export const ru = {
   scPhoto: 'Добавьте фото',
   scGoal: 'Цель обязательна',
   scGoalMax: '100 вполне достаточно',
+  scNickname: 'Прозвище обязательно',
+  scEmail: 'Почта обязательна',
+  scPassword: 'Пароль обязателен',
+  scPasswordMatches:
+    'Используйте только буквы, цифры и спецю символы (например: %, #, @)',
+  scPasswordMin: 'Используйте как минимум 8 символов',
 };

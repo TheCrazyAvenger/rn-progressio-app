@@ -17,6 +17,7 @@ export const FormItem: React.FC<FormItemProps> = ({
   errorMessage,
   children,
   errorStyle,
+  style,
 }) => {
   const theme = useAppSelector(state => state.theme.theme);
   return (
@@ -28,6 +29,7 @@ export const FormItem: React.FC<FormItemProps> = ({
         ) : (
           <UI.Textinput
             style={{
+              ...style,
               borderBottomColor:
                 errorMessage && isTouched ? THEME.COLOR_RED : setColor(theme),
             }}

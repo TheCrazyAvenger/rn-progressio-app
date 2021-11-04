@@ -1,6 +1,6 @@
 import {Formik} from 'formik';
 import React from 'react';
-import {Text, View, TextInput} from 'react-native';
+import {View, TextInput} from 'react-native';
 import {THEME} from '../../theme';
 import {GoalFormTypes, goalSchema} from '..';
 import {styles} from './styles';
@@ -8,6 +8,7 @@ import {useAppDispatch, useAppSelector} from '../../store/hooks';
 import {UI} from '../../ui';
 import {setGoal} from '../../store/slices/addSlice';
 import {setColor} from '../../utilities/utilities';
+import {Components} from '../../components';
 
 export const Goal: React.FC<GoalFormTypes> = ({
   callback,
@@ -41,35 +42,29 @@ export const Goal: React.FC<GoalFormTypes> = ({
         return (
           <UI.Block>
             <View style={styles.inputView}>
-              <View style={{position: 'relative'}}>
-                <TextInput
-                  keyboardType={'number-pad'}
-                  placeholderTextColor={setColor(theme)}
-                  style={{
-                    ...styles.textInput,
-                    color: setColor(theme),
-                    borderBottomColor:
-                      errors.goal && touched.goal
-                        ? THEME.COLOR_RED
-                        : setColor(theme),
-                  }}
-                  value={values.goal}
-                  onChangeText={handleChange('goal')}
-                  onBlur={() => setFieldTouched('goal')}
-                  placeholder={placeholder}
-                />
-                {errors.goal && touched.goal && (
-                  <Text
+              <Components.FormItem
+                isTouched={touched.goal}
+                errorMessage={errors.goal}>
+                <View style={{position: 'relative'}}>
+                  <TextInput
+                    keyboardType={'number-pad'}
+                    placeholderTextColor={setColor(theme)}
                     style={{
-                      position: 'absolute',
-                      top: 55,
-                      fontSize: 12,
-                      color: '#FF0D10',
-                    }}>
-                    {errors.goal}
-                  </Text>
-                )}
-              </View>
+                      ...styles.textInput,
+                      color: setColor(theme),
+                      borderBottomColor:
+                        errors.goal && touched.goal
+                          ? THEME.COLOR_RED
+                          : setColor(theme),
+                    }}
+                    value={values.goal}
+                    onChangeText={handleChange('goal')}
+                    onBlur={() => setFieldTouched('goal')}
+                    placeholder={placeholder}
+                  />
+                </View>
+              </Components.FormItem>
+
               <UI.Button
                 color={THEME.COLOR_WHITE}
                 style={{

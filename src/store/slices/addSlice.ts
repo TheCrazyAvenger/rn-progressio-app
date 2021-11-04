@@ -57,8 +57,8 @@ export const addSlice = createSlice({
       void state.projects.map((item: any) => {
         if (item.id === action.payload) {
           item.booked = !item.booked;
-          state.bookmarks = state.projects.filter((item: any) => item.booked);
         }
+        state.bookmarks = state.projects.filter((item: any) => item.booked);
         saveProjects(state.projects);
       }),
     removeProject: (state, action: PayloadAction<number>) => {

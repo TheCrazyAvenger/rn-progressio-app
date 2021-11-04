@@ -24,4 +24,5 @@ export type FormItemProps = {
   isTouched: any;
   errorMessage: any;
   errorStyle?: any;
+  style?: any;
 };

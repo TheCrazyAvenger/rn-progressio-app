@@ -5,6 +5,7 @@ import {Project} from './Project';
 import {Bookmarks} from './Bookmarks';
 import {Settings} from './Settings';
 import {Edit} from './Edit';
+import {SignIn} from './SignIn';
 
 export const Screens = {
   Main,
@@ -14,6 +15,7 @@ export const Screens = {
   Settings,
   Project,
   Edit,
+  SignIn,
 };
 
 export * from './PropTypes';

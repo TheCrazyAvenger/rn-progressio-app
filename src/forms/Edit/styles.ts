@@ -2,11 +2,6 @@ import {StyleSheet} from 'react-native';
 import {THEME} from '../../theme';
 
 export const styles = StyleSheet.create({
-  textInput: {
-    borderBottomWidth: 1.5,
-    marginBottom: 25,
-    minWidth: '100%',
-  },
   rating: {
     marginVertical: 15,
     minWidth: '100%',
