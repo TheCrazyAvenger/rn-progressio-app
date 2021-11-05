@@ -1,7 +1,7 @@
 import {Formik} from 'formik';
 import React from 'react';
 import {View, TextInput} from 'react-native';
-import {THEME} from '../../theme';
+import {THEME} from '../../constants';
 import {GoalFormTypes, goalSchema} from '..';
 import {styles} from './styles';
 import {useAppDispatch, useAppSelector} from '../../store/hooks';

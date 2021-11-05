@@ -1,11 +1,10 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from 'react';
 import {useNavigation} from '@react-navigation/core';
 import {useAppDispatch, useAppSelector} from '../../store/hooks';
 import {Image, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {toogleBookmarks} from '../../store/slices/addSlice';
-import {THEME} from '../../theme';
+import {THEME} from '../../constants';
 import {UI} from '../../ui';
 import {Typography} from '../Typography';
 import {styles} from './styles';

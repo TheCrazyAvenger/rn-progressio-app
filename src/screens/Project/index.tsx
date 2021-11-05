@@ -6,7 +6,7 @@ import {IRengerInfo} from '..';
 import {Typography} from '../../components/Typography';
 import {useAppDispatch} from '../../store/hooks';
 import {removeProject} from '../../store/slices/addSlice';
-import {THEME} from '../../theme';
+import {THEME} from '../../constants';
 import {UI} from '../../ui';
 
 import {styles} from './styles';

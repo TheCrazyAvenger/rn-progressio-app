@@ -1,29 +1,29 @@
 import React, {useState} from 'react';
 import {styles} from './styles';
 import {View} from 'react-native';
-import {Switch, Avatar} from 'react-native-paper';
+import {Switch} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Typography} from '../../components/Typography';
 import {UI} from '../../ui';
-import {THEME} from '../../theme';
+import {THEME} from '../../constants';
 import {changeTheme} from '../../store/slices/themeSlice';
 import {useAppDispatch, useAppSelector} from '../../store/hooks';
 import I18n from 'i18n-js';
 import {useNavigation} from '@react-navigation/core';
 import {logout} from '../../store/actions/auth';
-import {setColor} from '../../utilities/utilities';
+import {exportData, importData} from '../../store/actions/projects';
 
 export const Settings: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false);
+
+  const projects = useAppSelector(state => state.projects.projects);
   const appTheme = useAppSelector(state => state.theme.theme);
   const token = useAppSelector(state => state.auth.token);
-  const userData = useAppSelector(state => state.auth.userData);
+  const userEmail = useAppSelector(state => state.auth.userEmail);
+  const error = useAppSelector(state => state.auth.error);
   const [theme, setTheme] = useState<boolean>(appTheme);
 
-  console.log(token, userData);
-
-  const showProfile =
-    token && userData && token === userData.token ? true : false;
+  console.log(error);
 
   const navigation: any = useNavigation();
 
@@ -31,6 +31,7 @@ export const Settings: React.FC = () => {
 
   return (
     <UI.Root>
+      {error && <Typography.Description>{error}</Typography.Description>}
       <UI.DeleteModal
         title={I18n.t('alertLogout')}
         message={I18n.t('logoutMessage')}
@@ -48,13 +49,13 @@ export const Settings: React.FC = () => {
         </Typography.Title>
 
         <View style={styles.block}>
-          {showProfile ? (
-            <Typography.H2>{userData.email}</Typography.H2>
+          {token ? (
+            <Typography.H2>{userEmail}</Typography.H2>
           ) : (
             <Typography.Description>{I18n.t('sign')}</Typography.Description>
           )}
           <UI.Button
-            name={showProfile ? 'log-out' : 'log-in'}
+            name={token ? 'log-out' : 'log-in'}
             width={40}
             height={40}
             size={25}
@@ -94,20 +95,30 @@ export const Settings: React.FC = () => {
 
           <UI.Button
             name="arrow-down-outline"
+            disabled={!token}
             width={40}
             height={40}
             size={25}
+            style={{
+              backgroundColor: !token ? THEME.COLOR_GRAY : THEME.COLOR_RED,
+            }}
             color={THEME.COLOR_WHITE}
+            callback={() => dispatch(importData(userEmail))}
           />
         </View>
         <View style={styles.block}>
           <Typography.Description>{I18n.t('export')}</Typography.Description>
           <UI.Button
             name="arrow-up-outline"
+            disabled={!token}
             width={40}
             height={40}
             size={25}
+            style={{
+              backgroundColor: !!token ? THEME.COLOR_RED : THEME.COLOR_GRAY,
+            }}
             color={THEME.COLOR_WHITE}
+            callback={() => dispatch(exportData({userEmail, projects}))}
           />
         </View>
       </UI.Block>

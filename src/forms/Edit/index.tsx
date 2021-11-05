@@ -5,7 +5,7 @@ import {Image, View} from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Typography} from '../../components/Typography';
-import {THEME} from '../../theme';
+import {THEME} from '../../constants';
 import {UI} from '../../ui';
 import {launchCamera, openGallery, schema, IValues} from '..';
 import {styles} from './styles';

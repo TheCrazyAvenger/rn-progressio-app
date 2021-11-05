@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, View} from 'react-native';
 import {FormItemProps} from '..';
 import {useAppSelector} from '../../store/hooks';
-import {THEME} from '../../theme';
+import {THEME} from '../../constants/theme';
 import {UI} from '../../ui';
 import {setColor} from '../../utilities/utilities';
 import {Typography} from '../Typography';

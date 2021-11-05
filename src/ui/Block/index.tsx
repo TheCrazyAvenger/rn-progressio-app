@@ -2,7 +2,7 @@ import React from 'react';
 import {ScrollView, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useAppSelector} from '../../store/hooks';
-import {THEME} from '../../theme';
+import {THEME} from '../../constants/theme';
 import {styles} from './styles';
 
 type BlockTypes = {

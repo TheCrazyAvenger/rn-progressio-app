@@ -1,21 +1,10 @@
-import {Add} from './Add';
-import {Analytics} from './Analytics';
-import {Main} from './Main';
-import {Project} from './Project';
-import {Bookmarks} from './Bookmarks';
-import {Settings} from './Settings';
-import {Edit} from './Edit';
-import {SignIn} from './SignIn';
-
-export const Screens = {
-  Main,
-  Bookmarks,
-  Add,
-  Analytics,
-  Settings,
-  Project,
-  Edit,
-  SignIn,
-};
+export * from './Add';
+export * from './Analytics';
+export * from './Main';
+export * from './Project';
+export * from './Bookmarks';
+export * from './Settings';
+export * from './Edit';
+export * from './SignIn';
 
 export * from './PropTypes';

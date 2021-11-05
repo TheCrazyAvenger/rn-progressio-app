@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import {Image, View} from 'react-native';
 import {AirbnbRating} from 'react-native-elements';
 import {styles} from './styles';
-import {THEME} from '../../theme';
+import {THEME} from '../../constants';
 import {Typography} from '../../components/Typography';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {UI} from '../../ui';

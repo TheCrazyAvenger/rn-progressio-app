@@ -1,6 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {getGoal, getProjects} from '../actions/projects';
+import {
+  exportData,
+  getGoal,
+  getProjects,
+  importData,
+} from '../actions/projects';
 export interface AddState {
   projects: any;
   bookmarks: any;
@@ -98,6 +103,12 @@ export const addSlice = createSlice({
     });
     builder.addCase(getGoal.fulfilled, (state, action) => {
       state.goal = action.payload;
+    });
+    builder.addCase(exportData.fulfilled, state => {});
+    builder.addCase(importData.fulfilled, (state, action) => {
+      state.projects = action.payload;
+      state.bookmarks = state.projects.filter((item: any) => item.booked);
+      saveProjects(state.projects);
     });
   },
 });

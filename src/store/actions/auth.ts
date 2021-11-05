@@ -11,12 +11,12 @@ interface IAuth {
 export const getData = createAsyncThunk('auth/getData', async () => {
   try {
     let token = await AsyncStorage.getItem('token');
-    let userData = await AsyncStorage.getItem('userData');
+    let userEmail = await AsyncStorage.getItem('userEmail');
 
-    if (token === null && userData === null) {
-      return {token: null, userData: null};
+    if (token === null && userEmail === null) {
+      return {token: null, userEmail: null};
     } else {
-      return {token: JSON.parse(token!), userData: JSON.parse(userData!)};
+      return {token: JSON.parse(token!), userEmail: JSON.parse(userEmail!)};
     }
   } catch (e) {
     console.log(e);
@@ -49,9 +49,9 @@ export const auth = createAsyncThunk('auth/authHandle', async (data: IAuth) => {
 
     const token = response.data.idToken;
 
-    const userData = {token, email};
+    const userEmail = email;
 
-    await AsyncStorage.setItem('userData', JSON.stringify(userData));
+    await AsyncStorage.setItem('userEmail', JSON.stringify(userEmail));
     await AsyncStorage.setItem('token', JSON.stringify(response.data.idToken));
     await AsyncStorage.setItem(
       'expirationDate',
@@ -60,16 +60,20 @@ export const auth = createAsyncThunk('auth/authHandle', async (data: IAuth) => {
 
     return {
       token,
-      userData,
+      userEmail,
     };
   } catch (e) {
     console.log(e);
+    return {
+      reg: 'This user already exist',
+      login: 'Wrong login or/and password',
+    };
   }
 });
 
 export const logout = createAsyncThunk('auth/logout', async () => {
   try {
-    await AsyncStorage.removeItem('userData');
+    await AsyncStorage.removeItem('userEmail');
     await AsyncStorage.removeItem('token');
     await AsyncStorage.removeItem('expirationDate');
   } catch (e) {

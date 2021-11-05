@@ -1,16 +1,17 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {auth, getData, logout} from '../actions/auth';
-import {getTheme} from '../actions/theme';
 
 export interface AuthState {
   token: string | null;
-  userData: any;
+  userEmail: string | null;
+  error: {reg: string; login: string} | null;
 }
 
 const initialState: AuthState = {
   token: null,
-  userData: null,
+  userEmail: null,
+  error: null,
 };
 
 export const authSlice = createSlice({
@@ -19,18 +20,21 @@ export const authSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder.addCase(auth.fulfilled, (state, action: PayloadAction<any>) => {
-      const {token, userData} = action.payload;
+      const {token, userEmail} = action.payload;
       state.token = token;
-      state.userData = userData;
+      state.userEmail = userEmail;
+    });
+    builder.addCase(auth.rejected, (state, action: PayloadAction<any>) => {
+      state.error = action.payload;
     });
     builder.addCase(getData.fulfilled, (state, action: PayloadAction<any>) => {
-      const {token, userData} = action.payload;
+      const {token, userEmail} = action.payload;
       state.token = token;
-      state.userData = userData;
+      state.userEmail = userEmail;
     });
     builder.addCase(logout.fulfilled, state => {
       state.token = null;
-      state.userData = null;
+      state.userEmail = null;
     });
   },
 });

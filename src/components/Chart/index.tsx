@@ -1,4 +1,3 @@
-import I18n from 'i18n-js';
 import React from 'react';
 import {Dimensions} from 'react-native';
 import {UI} from '../../ui';

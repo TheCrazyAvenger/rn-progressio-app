@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Formik} from 'formik';
 import {Typography} from '../../components/Typography';
-import {THEME} from '../../theme';
+import {THEME} from '../../constants';
 import {UI} from '../../ui';
 import {sighnInSchema} from '..';
 import {styles} from './styles';
@@ -33,10 +33,8 @@ export const SignUp: React.FC = () => {
     );
   };
 
-  const authHandler = (
-    values: {email: string; password: string},
-    isLogin: boolean,
-  ) => {
+  const authHandler = (values: {email: string; password: string}) => {
+    const isLogin = type === 'reg' ? false : true;
     const data = {...values, isLogin};
     dispatch(auth(data));
     navigation.navigate('Setting');
@@ -49,7 +47,7 @@ export const SignUp: React.FC = () => {
         email: '',
         password: '',
       }}
-      onSubmit={values => authHandler(values, false)}>
+      onSubmit={values => authHandler(values)}>
       {({
         values,
         handleChange,

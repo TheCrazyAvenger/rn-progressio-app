@@ -3,7 +3,7 @@ import {Modal, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {UI} from '..';
 import {Typography} from '../../components/Typography';
-import {THEME} from '../../theme';
+import {THEME} from '../../constants/theme';
 import {styles} from './styles';
 
 type DeleteModalProps = {

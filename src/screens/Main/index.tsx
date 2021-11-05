@@ -3,9 +3,9 @@ import {useAppDispatch, useAppSelector} from '../../store/hooks';
 import {styles} from './styles';
 import {Components} from '../../components';
 import {UI} from '../../ui';
-import {THEME} from '../../theme';
+import {THEME} from '../../constants';
 import {useNavigation} from '@react-navigation/core';
-import {IProject, Screens} from '..';
+import {IProject, Add} from '..';
 import {getGoal, getProjects} from '../../store/actions/projects';
 import {getTheme} from '../../store/actions/theme';
 import I18n from 'i18n-js';
@@ -25,7 +25,7 @@ export const Main: React.FC = () => {
   }, []);
 
   const openAdd = () => {
-    navigation.navigate(Screens.Add);
+    navigation.navigate(Add);
   };
 
   const renderProjects = useMemo(() => {
