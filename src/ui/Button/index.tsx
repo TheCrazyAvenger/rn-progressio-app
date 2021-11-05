@@ -9,6 +9,9 @@ type ButtonTypes = {
   callback?: any;
   style?: any;
   disabled?: boolean;
+  size?: number;
+  width?: number;
+  height?: number;
 };
 
 export const Button: React.FC<ButtonTypes> = ({
@@ -17,14 +20,22 @@ export const Button: React.FC<ButtonTypes> = ({
   callback,
   style,
   disabled,
+  size,
+  width,
+  height,
 }) => {
   return (
     <TouchableOpacity
       onPress={callback}
       disabled={disabled}
       activeOpacity={0.7}
-      style={{...styles.button, ...style}}>
-      <Icon name={name} size={30} color={color} />
+      style={{
+        ...styles.button,
+        width: width ? width : 55,
+        height: height ? height : 55,
+        ...style,
+      }}>
+      <Icon name={name} size={size ? size : 30} color={color} />
     </TouchableOpacity>
   );
 };

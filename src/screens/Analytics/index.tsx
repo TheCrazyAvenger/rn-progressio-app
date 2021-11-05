@@ -2,8 +2,7 @@ import React, {useState} from 'react';
 import {UI} from '../../ui';
 import {LineChart, ProgressChart} from 'react-native-chart-kit';
 import {styles} from './styles';
-import {Typography} from '../../components/Typography';
-import {Alert, Dimensions, Modal, View} from 'react-native';
+import {Alert, Modal, View} from 'react-native';
 import {useAppDispatch, useAppSelector} from '../../store/hooks';
 import {Forms} from '../../forms';
 import {THEME} from '../../theme';
@@ -14,6 +13,7 @@ import {Components} from '../../components';
 
 export const Analytics: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
 
   const projects = useAppSelector(state => state.projects.projects);
   const goal = useAppSelector(state => state.projects.goal);
@@ -41,20 +41,6 @@ export const Analytics: React.FC = () => {
     }
   });
 
-  const deleteHandler = () =>
-    Alert.alert(I18n.t('alertAnalytics'), I18n.t('messageAnalytics'), [
-      {
-        text: I18n.t('cancelButton'),
-        style: 'cancel',
-      },
-      {
-        text: I18n.t('okButton'),
-        onPress: () => {
-          dispatch(setGoal(null));
-        },
-      },
-    ]);
-
   return projects.length < 2 ? (
     <EmptyList
       title={I18n.t('emptyTitle')}
@@ -77,6 +63,17 @@ export const Analytics: React.FC = () => {
           />
         </UI.Root>
       </Modal>
+
+      <UI.DeleteModal
+        title={I18n.t('alertAnalytics')}
+        message={I18n.t('messageAnalytics')}
+        onSubmit={() => {
+          dispatch(setGoal(null));
+          setDeleteModal(false);
+        }}
+        onCancel={() => setDeleteModal(false)}
+        visible={deleteModal}
+      />
 
       {goal ? (
         <>
@@ -108,7 +105,7 @@ export const Analytics: React.FC = () => {
                 name="close-outline"
                 color={THEME.COLOR_WHITE}
                 style={styles.button}
-                callback={deleteHandler}
+                callback={() => setDeleteModal(true)}
               />
             </View>
           </UI.Block>

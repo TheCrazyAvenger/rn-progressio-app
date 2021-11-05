@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {auth, getData} from '../actions/auth';
+import {auth, getData, logout} from '../actions/auth';
 import {getTheme} from '../actions/theme';
 
 export interface AuthState {
@@ -27,6 +27,10 @@ export const authSlice = createSlice({
       const {token, userData} = action.payload;
       state.token = token;
       state.userData = userData;
+    });
+    builder.addCase(logout.fulfilled, state => {
+      state.token = null;
+      state.userData = null;
     });
   },
 });

@@ -3,12 +3,10 @@ import {THEME} from '../../theme';
 
 export const styles = StyleSheet.create({
   button: {
-    width: 55,
-    height: 55,
     backgroundColor: THEME.COLOR_RED,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 7,
+    borderRadius: 5,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

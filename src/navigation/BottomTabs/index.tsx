@@ -31,16 +31,15 @@ export const BottomTabs: React.FC = () => {
           title: 'Prgressio',
           headerShown: false,
           tabBarIcon: ({focused}) => {
+            const iconName = focused ? 'home' : 'home-outline';
+
             return (
-              <TouchableOpacity
-                activeOpacity={0.5}
-                onPress={() => navigation.navigate('Main')}>
-                <Icon
-                  name="home"
-                  size={focused ? 30 : 25}
-                  color={focused ? THEME.COLOR_RED : setColor(theme)}
-                />
-              </TouchableOpacity>
+              <Icon
+                onPress={() => navigation.navigate('Main')}
+                name={iconName}
+                size={focused ? 30 : 25}
+                color={focused ? THEME.COLOR_RED : setColor(theme)}
+              />
             );
           },
         }}
@@ -53,7 +52,7 @@ export const BottomTabs: React.FC = () => {
           headerLeft: () => {
             return (
               <Icon
-                name="analytics"
+                name="pie-chart"
                 size={25}
                 style={{marginLeft: 20, marginRight: -10}}
                 color={THEME.COLOR_RED}
@@ -61,16 +60,15 @@ export const BottomTabs: React.FC = () => {
             );
           },
           tabBarIcon: ({focused}) => {
+            const iconName = focused ? 'pie-chart' : 'pie-chart-outline';
+
             return (
-              <TouchableOpacity
-                activeOpacity={0.5}
-                onPress={() => navigation.navigate('Analytics')}>
-                <Icon
-                  name="analytics"
-                  size={focused ? 30 : 25}
-                  color={focused ? THEME.COLOR_RED : setColor(theme)}
-                />
-              </TouchableOpacity>
+              <Icon
+                onPress={() => navigation.navigate('Analytics')}
+                name={iconName}
+                size={focused ? 30 : 25}
+                color={focused ? THEME.COLOR_RED : setColor(theme)}
+              />
             );
           },
         }}
@@ -84,7 +82,7 @@ export const BottomTabs: React.FC = () => {
           headerLeft: () => {
             return (
               <Icon
-                name="settings"
+                name="settings-outline"
                 size={25}
                 style={{marginLeft: 20, marginRight: -10}}
                 color={THEME.COLOR_RED}
@@ -92,16 +90,15 @@ export const BottomTabs: React.FC = () => {
             );
           },
           tabBarIcon: ({focused}) => {
+            const iconName = focused ? 'settings' : 'settings-outline';
+
             return (
-              <TouchableOpacity
-                activeOpacity={0.5}
-                onPress={() => navigation.navigate('Settings')}>
-                <Icon
-                  name="settings"
-                  size={focused ? 30 : 25}
-                  color={focused ? THEME.COLOR_RED : setColor(theme)}
-                />
-              </TouchableOpacity>
+              <Icon
+                name={iconName}
+                onPress={() => navigation.navigate('Settings')}
+                size={focused ? 30 : 25}
+                color={focused ? THEME.COLOR_RED : setColor(theme)}
+              />
             );
           },
         }}

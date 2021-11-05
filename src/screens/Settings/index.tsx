@@ -10,8 +10,11 @@ import {changeTheme} from '../../store/slices/themeSlice';
 import {useAppDispatch, useAppSelector} from '../../store/hooks';
 import I18n from 'i18n-js';
 import {useNavigation} from '@react-navigation/core';
+import {logout} from '../../store/actions/auth';
+import {setColor} from '../../utilities/utilities';
 
 export const Settings: React.FC = () => {
+  const [modalVisible, setModalVisible] = useState(false);
   const appTheme = useAppSelector(state => state.theme.theme);
   const token = useAppSelector(state => state.auth.token);
   const userData = useAppSelector(state => state.auth.userData);
@@ -28,30 +31,39 @@ export const Settings: React.FC = () => {
 
   return (
     <UI.Root>
+      <UI.DeleteModal
+        title={I18n.t('alertLogout')}
+        message={I18n.t('logoutMessage')}
+        onSubmit={() => {
+          dispatch(logout());
+          setModalVisible(false);
+        }}
+        onCancel={() => setModalVisible(false)}
+        visible={modalVisible}
+      />
+
       <UI.Block>
         <Typography.Title style={styles.title}>
           {I18n.t('account')}
         </Typography.Title>
 
-        {!showProfile ? (
-          <View style={styles.block}>
-            <UI.TextButton
-              title={I18n.t('sign')}
-              type="clear"
-              onPress={() => navigation.navigate('SignIn')}
-            />
-            <Avatar.Text
-              size={35}
-              label="?"
-              style={{backgroundColor: THEME.COLOR_RED}}
-            />
-          </View>
-        ) : (
-          <View style={{alignItems: 'flex-start', width: '100%'}}>
-            <Typography.H2>{userData.nickname}</Typography.H2>
-            <Typography.Subtitle>{userData.email}</Typography.Subtitle>
-          </View>
-        )}
+        <View style={styles.block}>
+          {showProfile ? (
+            <Typography.H2>{userData.email}</Typography.H2>
+          ) : (
+            <Typography.Description>{I18n.t('sign')}</Typography.Description>
+          )}
+          <UI.Button
+            name={showProfile ? 'log-out' : 'log-in'}
+            width={40}
+            height={40}
+            size={25}
+            color={THEME.COLOR_WHITE}
+            callback={() =>
+              token ? setModalVisible(true) : navigation.navigate('SignIn')
+            }
+          />
+        </View>
       </UI.Block>
       <UI.Block>
         <Typography.Title style={styles.title}>
@@ -79,19 +91,24 @@ export const Settings: React.FC = () => {
         </Typography.Title>
         <View style={{...styles.block, marginBottom: 15}}>
           <Typography.Description>{I18n.t('import')}</Typography.Description>
-          <View style={styles.logoView}>
-            <Icon
-              name="arrow-down-outline"
-              color={THEME.COLOR_WHITE}
-              size={25}
-            />
-          </View>
+
+          <UI.Button
+            name="arrow-down-outline"
+            width={40}
+            height={40}
+            size={25}
+            color={THEME.COLOR_WHITE}
+          />
         </View>
         <View style={styles.block}>
           <Typography.Description>{I18n.t('export')}</Typography.Description>
-          <View style={styles.logoView}>
-            <Icon name="arrow-up-outline" color={THEME.COLOR_WHITE} size={25} />
-          </View>
+          <UI.Button
+            name="arrow-up-outline"
+            width={40}
+            height={40}
+            size={25}
+            color={THEME.COLOR_WHITE}
+          />
         </View>
       </UI.Block>
       <UI.Block>

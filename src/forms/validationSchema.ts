@@ -30,12 +30,6 @@ export let goalSchema = yup.object().shape({
 });
 
 export let sighnInSchema = yup.object().shape({
-  nickname: yup
-    .string()
-    .required(I18n.t('scNickname'))
-    .min(3, I18n.t('scMin'))
-    .matches(/^[a-zA-Z ]+$/, {message: I18n.t('scMatches')})
-    .max(12, I18n.t('scMax')),
   email: yup.string().email().required(I18n.t('scEmail')),
   password: yup
     .string()

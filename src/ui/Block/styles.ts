@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
     alignSelf: 'center',
     width: '98%',
-    borderRadius: 7,
+    borderRadius: 5,
     overflow: 'hidden',
     padding: 15,
     alignItems: 'center',

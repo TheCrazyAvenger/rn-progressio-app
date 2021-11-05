@@ -1,9 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {AsyncThunkPayloadCreator, createAsyncThunk} from '@reduxjs/toolkit';
+import {createAsyncThunk} from '@reduxjs/toolkit';
 import axios from 'axios';
 
 interface IAuth {
-  nickname: string;
   email: string;
   password: string;
   isLogin: boolean;
@@ -26,7 +25,7 @@ export const getData = createAsyncThunk('auth/getData', async () => {
 
 export const auth = createAsyncThunk('auth/authHandle', async (data: IAuth) => {
   try {
-    const {nickname, email, password, isLogin} = data;
+    const {email, password, isLogin} = data;
 
     const authData = {
       email,
@@ -50,7 +49,7 @@ export const auth = createAsyncThunk('auth/authHandle', async (data: IAuth) => {
 
     const token = response.data.idToken;
 
-    const userData = {nickname, token, email};
+    const userData = {token, email};
 
     await AsyncStorage.setItem('userData', JSON.stringify(userData));
     await AsyncStorage.setItem('token', JSON.stringify(response.data.idToken));
@@ -63,6 +62,16 @@ export const auth = createAsyncThunk('auth/authHandle', async (data: IAuth) => {
       token,
       userData,
     };
+  } catch (e) {
+    console.log(e);
+  }
+});
+
+export const logout = createAsyncThunk('auth/logout', async () => {
+  try {
+    await AsyncStorage.removeItem('userData');
+    await AsyncStorage.removeItem('token');
+    await AsyncStorage.removeItem('expirationDate');
   } catch (e) {
     console.log(e);
   }

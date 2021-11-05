@@ -14,13 +14,12 @@ export const Bookmarks: React.FC = () => {
     ));
   }, [bookmarks]);
 
-  const renderScreen = () => {
-    if (!!bookmarks[0]) {
-      return <UI.Root>{renderBookmarks}</UI.Root>;
-    } else {
-      return <Components.EmptyList title={I18n.t('empty')} />;
-    }
-  };
+  const renderScreen = () =>
+    bookmarks[0] ? (
+      <UI.Root>{renderBookmarks}</UI.Root>
+    ) : (
+      <Components.EmptyList title={I18n.t('empty')} />
+    );
 
   return renderScreen();
 };

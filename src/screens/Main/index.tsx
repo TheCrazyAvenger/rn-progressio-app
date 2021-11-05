@@ -34,13 +34,12 @@ export const Main: React.FC = () => {
     ));
   }, [projects]);
 
-  const renderScreen = () => {
-    if (!!projects[0]) {
-      return <UI.Root>{renderProjects}</UI.Root>;
-    } else {
-      return <Components.EmptyList title={I18n.t('empty')} />;
-    }
-  };
+  const renderScreen = () =>
+    projects[0] ? (
+      <UI.Root>{renderProjects}</UI.Root>
+    ) : (
+      <Components.EmptyList title={I18n.t('empty')} />
+    );
 
   return (
     <>

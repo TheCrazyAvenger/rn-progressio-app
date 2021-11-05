@@ -11,11 +11,14 @@ import {Components} from '../../components';
 import {View} from 'react-native';
 import {auth} from '../../store/actions/auth';
 import {useAppDispatch} from '../../store/hooks';
+import {useNavigation} from '@react-navigation/core';
 
 export const SignUp: React.FC = () => {
   const [type, setType] = useState('reg');
 
   const dispatch = useAppDispatch();
+
+  const navigation: any = useNavigation();
 
   const authItem = (text: string, buttonTitle: string, type: string) => {
     return (
@@ -31,18 +34,18 @@ export const SignUp: React.FC = () => {
   };
 
   const authHandler = (
-    values: {nickname: string; email: string; password: string},
+    values: {email: string; password: string},
     isLogin: boolean,
   ) => {
     const data = {...values, isLogin};
     dispatch(auth(data));
+    navigation.navigate('Setting');
   };
 
   return (
     <Formik
       validationSchema={sighnInSchema}
       initialValues={{
-        nickname: '',
         email: '',
         password: '',
       }}
@@ -62,16 +65,6 @@ export const SignUp: React.FC = () => {
               <Typography.Title style={styles.title}>
                 {I18n.t(type)}
               </Typography.Title>
-
-              <Components.FormItem
-                title={I18n.t('nickname')}
-                value={values.nickname}
-                onChange={handleChange('nickname')}
-                onBlur={() => setFieldTouched('nickname')}
-                placeholder={I18n.t('plNickname')}
-                isTouched={touched.nickname}
-                errorMessage={errors.nickname}
-              />
 
               <Components.FormItem
                 title={I18n.t('email')}

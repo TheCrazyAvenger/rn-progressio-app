@@ -2,19 +2,19 @@ import {StyleSheet} from 'react-native';
 import {THEME} from '../../theme';
 
 export const styles = StyleSheet.create({
-  block: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  modal: {
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    flex: 1,
     alignItems: 'center',
+    justifyContent: 'center',
   },
-  title: {
-    marginBottom: 15,
+  message: {
+    marginVertical: 15,
   },
-  language: {
+  buttons: {
     flexDirection: 'row',
   },
-  additional: {
-    flexDirection: 'row',
+  button: {
+    marginHorizontal: 10,
   },
 });

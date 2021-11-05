@@ -8,12 +8,9 @@ type RootTypes = {
   type?: 'View';
 };
 
-export const Root: React.FC<RootTypes> = ({style, children, type}) => {
-  if (type === 'View') {
-    return <View style={{...styles.root, ...style}}>{children}</View>;
-  } else {
-    return (
-      <ScrollView style={{...styles.root, ...style}}>{children}</ScrollView>
-    );
-  }
-};
+export const Root: React.FC<RootTypes> = ({style, children, type}) =>
+  type === 'View' ? (
+    <View style={{...styles.root, ...style}}>{children}</View>
+  ) : (
+    <ScrollView style={{...styles.root, ...style}}>{children}</ScrollView>
+  );

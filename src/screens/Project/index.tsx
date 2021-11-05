@@ -1,6 +1,6 @@
 import {useNavigation, useRoute} from '@react-navigation/core';
 import I18n from 'i18n-js';
-import React, {useMemo} from 'react';
+import React, {useMemo, useState} from 'react';
 import {Alert, Image, View} from 'react-native';
 import {IRengerInfo} from '..';
 import {Typography} from '../../components/Typography';
@@ -12,25 +12,11 @@ import {UI} from '../../ui';
 import {styles} from './styles';
 
 export const Project: React.FC = () => {
+  const [modalVisible, setModalVisible] = useState(false);
   const route: any = useRoute();
   const navigation: any = useNavigation();
   const {data} = route.params;
   const dispatch = useAppDispatch();
-
-  const deleteHandler = () =>
-    Alert.alert(I18n.t('alertTitle'), I18n.t('alertMessage'), [
-      {
-        text: I18n.t('cancelButton'),
-        style: 'cancel',
-      },
-      {
-        text: I18n.t('okButton'),
-        onPress: () => {
-          dispatch(removeProject(data.id));
-          navigation.navigate('Main');
-        },
-      },
-    ]);
 
   const editHandler = () => {
     navigation.navigate('Edit', {
@@ -56,6 +42,18 @@ export const Project: React.FC = () => {
 
   return (
     <UI.Root>
+      <UI.DeleteModal
+        title={I18n.t('alertTitle')}
+        message={I18n.t('alertMessage')}
+        onSubmit={() => {
+          dispatch(removeProject(data.id));
+          setModalVisible(false);
+          navigation.navigate('Main');
+        }}
+        onCancel={() => setModalVisible(false)}
+        visible={modalVisible}
+      />
+
       <UI.Block style={{padding: 0}}>
         <Image
           source={{uri: data.img}}
@@ -100,7 +98,7 @@ export const Project: React.FC = () => {
             name="close-outline"
             color={THEME.COLOR_WHITE}
             style={styles.button}
-            callback={deleteHandler}
+            callback={() => setModalVisible(true)}
           />
         </View>
       </UI.Block>

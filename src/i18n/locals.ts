@@ -34,6 +34,7 @@ export const en = {
   //Settings
   account: 'Account',
   sign: 'SignUp/SignIn',
+  logout: 'Logout',
   common: 'Common',
   darkMode: 'Dark mode',
   language: 'Language',
@@ -42,6 +43,8 @@ export const en = {
   export: 'Export data',
   about: 'About',
   version: 'Version',
+  alertLogout: 'Are you sure you want to quit?',
+  logoutMessage: 'All unsaved data will be lost',
 
   //Login
   signUpMessage: `Dont't have an account?`,
@@ -139,6 +142,7 @@ export const ru = {
   //Settings
   account: 'Аккаунт',
   sign: 'Войти/Зарегестрироваться',
+  logout: 'Выйти',
   common: 'Общие',
   darkMode: 'Темная тема',
   additional: 'Дополнительно',
