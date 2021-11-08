@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
-import {UI} from '../../ui';
+import {Root, Block, Button, DeleteModal} from '../../ui';
 import {LineChart, ProgressChart} from 'react-native-chart-kit';
 import {styles} from './styles';
 import {Modal, View} from 'react-native';
 import {useAppDispatch, useAppSelector} from '../../store/hooks';
-import {Forms} from '../../forms';
+import {Goal} from '../../forms';
 import {THEME} from '../../constants';
 import {setGoal} from '../../store/slices/addSlice';
 import I18n from 'i18n-js';
 import {EmptyList} from '../../components/EmptyList';
-import {Components} from '../../components';
+import {Chart} from '../../components';
 
 export const Analytics: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -30,7 +30,7 @@ export const Analytics: React.FC = () => {
 
   lastProjects.map((item: any) => {
     namesArr.push(item.name);
-    timeArr.push(item.info[1].value);
+    timeArr.push(+item.info[1].value);
     ratingArr.push(item.info[0].value);
     const date = new Date(item.date).getMonth();
     if (date === currentMonth) {
@@ -47,7 +47,7 @@ export const Analytics: React.FC = () => {
       description={I18n.t('emptyDescription')}
     />
   ) : (
-    <UI.Root>
+    <Root>
       <Modal
         animationType="slide"
         transparent={true}
@@ -55,16 +55,16 @@ export const Analytics: React.FC = () => {
         onRequestClose={() => {
           setModalVisible(!modalVisible);
         }}>
-        <UI.Root type="View" style={styles.modal}>
-          <Forms.Goal
+        <Root type="View" style={styles.modal}>
+          <Goal
             placeholder={I18n.t('plEditGoal')}
             type="Modal"
             callback={() => setModalVisible(!modalVisible)}
           />
-        </UI.Root>
+        </Root>
       </Modal>
 
-      <UI.DeleteModal
+      <DeleteModal
         title={I18n.t('alertAnalytics')}
         message={I18n.t('messageAnalytics')}
         onSubmit={() => {
@@ -77,7 +77,7 @@ export const Analytics: React.FC = () => {
 
       {goal ? (
         <>
-          <Components.Chart
+          <Chart
             ChartType={ProgressChart}
             title={`${I18n.t('goal')} (${monthValue} / ${goal})`}
             data={{
@@ -93,28 +93,28 @@ export const Analytics: React.FC = () => {
             backgroundGradientTo="#6a5fcf"
           />
 
-          <UI.Block>
+          <Block>
             <View style={styles.buttons}>
-              <UI.Button
+              <Button
                 name="pencil-outline"
                 color={THEME.COLOR_WHITE}
                 style={{...styles.button, backgroundColor: THEME.COLOR_BLUE}}
                 callback={() => setModalVisible(true)}
               />
-              <UI.Button
+              <Button
                 name="close-outline"
                 color={THEME.COLOR_WHITE}
                 style={styles.button}
                 callback={() => setDeleteModal(true)}
               />
             </View>
-          </UI.Block>
+          </Block>
         </>
       ) : (
-        <Forms.Goal placeholder={I18n.t('plGoal')} />
+        <Goal placeholder={I18n.t('plGoal')} />
       )}
 
-      <Components.Chart
+      <Chart
         ChartType={LineChart}
         bezier={true}
         title={I18n.t('timeSpent')}
@@ -133,7 +133,7 @@ export const Analytics: React.FC = () => {
         strokeColor="#ffa726"
       />
 
-      <Components.Chart
+      <Chart
         ChartType={LineChart}
         bezier={true}
         title={I18n.t('rating')}
@@ -152,7 +152,7 @@ export const Analytics: React.FC = () => {
         strokeColor="#c28ce6"
       />
 
-      <Components.Chart
+      <Chart
         ChartType={LineChart}
         title={I18n.t('uploads')}
         data={{
@@ -168,6 +168,6 @@ export const Analytics: React.FC = () => {
         backgroundGradientTo="#e3646f"
         strokeColor="#ed9aa1"
       />
-    </UI.Root>
+    </Root>
   );
 };

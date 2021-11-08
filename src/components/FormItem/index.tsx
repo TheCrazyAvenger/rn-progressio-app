@@ -3,9 +3,9 @@ import {Text, View} from 'react-native';
 import {FormItemProps} from '..';
 import {useAppSelector} from '../../store/hooks';
 import {THEME} from '../../constants/theme';
-import {UI} from '../../ui';
+import {Textinput} from '../../ui';
 import {setColor} from '../../utilities/utilities';
-import {Typography} from '../Typography';
+import {Description} from '../Typography';
 
 export const FormItem: React.FC<FormItemProps> = ({
   title,
@@ -22,12 +22,12 @@ export const FormItem: React.FC<FormItemProps> = ({
   const theme = useAppSelector(state => state.theme.theme);
   return (
     <View>
-      {title ? <Typography.Description>{title}:</Typography.Description> : null}
+      {title ? <Description>{title}:</Description> : null}
       <View style={{position: 'relative'}}>
         {children ? (
           children
         ) : (
-          <UI.Textinput
+          <Textinput
             style={{
               ...style,
               borderBottomColor:

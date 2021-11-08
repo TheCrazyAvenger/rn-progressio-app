@@ -2,11 +2,10 @@ import React from 'react';
 import {SignIn, Settings} from '../../screens';
 import {styles} from './styles';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {THEME} from '../../constants';
-import Icon from 'react-native-vector-icons/Ionicons';
 import {setColor} from '../../utilities/utilities';
 import {useAppSelector} from '../../store/hooks';
 import I18n from 'i18n-js';
+import {Screens} from '../../constants';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,24 +18,14 @@ export const SettingsStack: React.FC = () => {
         headerTitleStyle: {...styles.titleStyle, color: setColor(theme)},
       }}>
       <Stack.Screen
-        name="Setting"
+        name={Screens.settings}
         options={{
-          title: I18n.t('settings'),
-          headerLeft: () => {
-            return (
-              <Icon
-                name="settings"
-                size={23}
-                style={{marginRight: 8}}
-                color={THEME.COLOR_RED}
-              />
-            );
-          },
+          headerShown: false,
         }}
         component={Settings}
       />
       <Stack.Screen
-        name="SignIn"
+        name={Screens.signin}
         options={{title: I18n.t('signTitle')}}
         component={SignIn}
       />

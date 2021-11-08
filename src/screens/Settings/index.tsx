@@ -1,38 +1,54 @@
 import React, {useState} from 'react';
 import {styles} from './styles';
-import {View} from 'react-native';
+import {ActivityIndicator, View} from 'react-native';
 import {Switch} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {Typography} from '../../components/Typography';
-import {UI} from '../../ui';
-import {THEME} from '../../constants';
+import {Title, Subtitle, Description, H2} from '../../components/Typography';
+import {Root, Block, Button, DeleteModal} from '../../ui';
+import {Screens, THEME} from '../../constants';
 import {changeTheme} from '../../store/slices/themeSlice';
 import {useAppDispatch, useAppSelector} from '../../store/hooks';
 import I18n from 'i18n-js';
 import {useNavigation} from '@react-navigation/core';
 import {logout} from '../../store/actions/auth';
-import {exportData, importData} from '../../store/actions/projects';
+import {
+  useImportProjectsMutation,
+  useExportProjectsMutation,
+  useAuthMutation,
+} from '../../store/api';
+import {setProjects} from '../../store/slices/addSlice';
 
 export const Settings: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false);
+
+  const [importProjects, {isLoading: isLoadingImport}] =
+    useImportProjectsMutation();
+  const [exportProjects, {isLoading}] = useExportProjectsMutation();
+  const [_, {isLoading: isLoadingAuth}] = useAuthMutation();
 
   const projects = useAppSelector(state => state.projects.projects);
   const appTheme = useAppSelector(state => state.theme.theme);
   const token = useAppSelector(state => state.auth.token);
   const userEmail = useAppSelector(state => state.auth.userEmail);
-  const error = useAppSelector(state => state.auth.error);
+
   const [theme, setTheme] = useState<boolean>(appTheme);
-
-  console.log(error);
-
-  const navigation: any = useNavigation();
 
   const dispatch = useAppDispatch();
 
+  const handleImport = async () => {
+    const response = await importProjects(userEmail).unwrap();
+    dispatch(setProjects(response));
+  };
+
+  const handleExport = async () => {
+    await exportProjects({userEmail, projects}).unwrap();
+  };
+
+  const navigation: any = useNavigation();
+
   return (
-    <UI.Root>
-      {error && <Typography.Description>{error}</Typography.Description>}
-      <UI.DeleteModal
+    <Root>
+      <DeleteModal
         title={I18n.t('alertLogout')}
         message={I18n.t('logoutMessage')}
         onSubmit={() => {
@@ -43,35 +59,37 @@ export const Settings: React.FC = () => {
         visible={modalVisible}
       />
 
-      <UI.Block>
-        <Typography.Title style={styles.title}>
-          {I18n.t('account')}
-        </Typography.Title>
+      <Block>
+        <Title style={styles.title}>{I18n.t('account')}</Title>
 
         <View style={styles.block}>
           {token ? (
-            <Typography.H2>{userEmail}</Typography.H2>
+            <H2>{userEmail}</H2>
           ) : (
-            <Typography.Description>{I18n.t('sign')}</Typography.Description>
+            <Description>{I18n.t('sign')}</Description>
           )}
-          <UI.Button
+          <Button
             name={token ? 'log-out' : 'log-in'}
+            disabled={isLoadingAuth}
             width={40}
             height={40}
             size={25}
             color={THEME.COLOR_WHITE}
+            style={{
+              backgroundColor: !isLoading ? THEME.COLOR_RED : THEME.COLOR_GRAY,
+            }}
             callback={() =>
-              token ? setModalVisible(true) : navigation.navigate('SignIn')
+              token
+                ? setModalVisible(true)
+                : navigation.navigate(Screens.signin)
             }
           />
         </View>
-      </UI.Block>
-      <UI.Block>
-        <Typography.Title style={styles.title}>
-          {I18n.t('common')}
-        </Typography.Title>
+      </Block>
+      <Block>
+        <Title style={styles.title}>{I18n.t('common')}</Title>
         <View style={styles.block}>
-          <Typography.Description>{I18n.t('darkMode')}</Typography.Description>
+          <Description>{I18n.t('darkMode')}</Description>
 
           <View>
             <Switch
@@ -84,48 +102,51 @@ export const Settings: React.FC = () => {
             />
           </View>
         </View>
-      </UI.Block>
+      </Block>
 
-      <UI.Block>
-        <Typography.Title style={styles.title}>
-          {I18n.t('additional')}
-        </Typography.Title>
+      <Block>
+        <Title style={styles.title}>{I18n.t('additional')}</Title>
         <View style={{...styles.block, marginBottom: 15}}>
-          <Typography.Description>{I18n.t('import')}</Typography.Description>
+          <Description>{I18n.t('import')}</Description>
 
-          <UI.Button
+          <Button
+            loading={isLoadingImport}
             name="arrow-down-outline"
-            disabled={!token}
+            disabled={isLoading || !token}
             width={40}
             height={40}
             size={25}
             style={{
-              backgroundColor: !token ? THEME.COLOR_GRAY : THEME.COLOR_RED,
+              backgroundColor:
+                !!token && !isLoadingImport
+                  ? THEME.COLOR_RED
+                  : THEME.COLOR_GRAY,
             }}
             color={THEME.COLOR_WHITE}
-            callback={() => dispatch(importData(userEmail))}
+            callback={handleImport}
           />
         </View>
         <View style={styles.block}>
-          <Typography.Description>{I18n.t('export')}</Typography.Description>
-          <UI.Button
+          <Description>{I18n.t('export')}</Description>
+
+          <Button
+            loading={isLoading}
             name="arrow-up-outline"
-            disabled={!token}
+            disabled={isLoading || !token}
             width={40}
             height={40}
             size={25}
             style={{
-              backgroundColor: !!token ? THEME.COLOR_RED : THEME.COLOR_GRAY,
+              backgroundColor:
+                !!token && !isLoading ? THEME.COLOR_RED : THEME.COLOR_GRAY,
             }}
             color={THEME.COLOR_WHITE}
-            callback={() => dispatch(exportData({userEmail, projects}))}
+            callback={handleExport}
           />
         </View>
-      </UI.Block>
-      <UI.Block>
-        <Typography.Title style={styles.title}>
-          {I18n.t('about')}
-        </Typography.Title>
+      </Block>
+      <Block>
+        <Title style={styles.title}>{I18n.t('about')}</Title>
         <View style={{...styles.block, marginBottom: 15}}>
           <View style={styles.additional}>
             <Icon
@@ -134,14 +155,14 @@ export const Settings: React.FC = () => {
               style={{marginRight: 5}}
               color={THEME.COLOR_RED}
             />
-            <Typography.H2>Progressio</Typography.H2>
+            <H2>Progressio</H2>
           </View>
-          <Typography.Description>
-            {I18n.t('version')}: <Typography.H2>0.0.1</Typography.H2>
-          </Typography.Description>
+          <Description>
+            {I18n.t('version')}: <H2>0.0.1</H2>
+          </Description>
         </View>
-        <Typography.Subtitle>Progressio app 2021</Typography.Subtitle>
-      </UI.Block>
-    </UI.Root>
+        <Subtitle>Progressio app 2021</Subtitle>
+      </Block>
+    </Root>
   );
 };

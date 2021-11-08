@@ -12,4 +12,8 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 10,
   },
+  authError: {
+    color: THEME.COLOR_RED,
+    marginTop: 15,
+  },
 });

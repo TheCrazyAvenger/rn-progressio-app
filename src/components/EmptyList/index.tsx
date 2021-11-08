@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {EmptyListProps} from '..';
 import {useAppSelector} from '../../store/hooks';
 import {setColor} from '../../utilities/utilities';
-import {Typography} from '../Typography';
+import {Title, Description} from '../Typography';
 import {styles} from './styles';
 
 export const EmptyList: React.FC<EmptyListProps> = ({title, description}) => {
@@ -13,11 +13,9 @@ export const EmptyList: React.FC<EmptyListProps> = ({title, description}) => {
     <View style={styles.noData}>
       <Icon name="document-outline" color={setColor(theme)} size={100} />
       <View style={styles.info}>
-        <Typography.Title>{title}</Typography.Title>
+        <Title>{title}</Title>
         {description ? (
-          <Typography.Description style={{textAlign: 'center'}}>
-            {description}
-          </Typography.Description>
+          <Description style={{textAlign: 'center'}}>{description}</Description>
         ) : null}
       </View>
     </View>

@@ -5,6 +5,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     position: 'relative',
     paddingHorizontal: 7,
-    paddingVertical: 7,
+    paddingVertical: 5,
   },
 });

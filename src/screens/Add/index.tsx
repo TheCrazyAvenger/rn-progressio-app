@@ -1,6 +1,6 @@
 import React from 'react';
-import {Forms} from '../../forms';
+import {Add as AddForm} from '../../forms';
 
 export const Add: React.FC = () => {
-  return <Forms.Add />;
+  return <AddForm />;
 };

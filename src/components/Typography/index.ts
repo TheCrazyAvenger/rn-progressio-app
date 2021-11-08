@@ -1,8 +1,6 @@
-import {Description} from './Description';
-import {H2} from './H2';
-import {Subtitle} from './Subtitle';
-import {Title} from './Title';
-
-export const Typography = {Title, Subtitle, Description, H2};
+export * from './Description';
+export * from './H2';
+export * from './Subtitle';
+export * from './Title';
 
 export * from './PropTypes';

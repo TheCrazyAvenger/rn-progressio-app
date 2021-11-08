@@ -1,11 +1,10 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {auth, getData, logout} from '../actions/auth';
+import {getData, logout} from '../actions/auth';
 
 export interface AuthState {
   token: string | null;
   userEmail: string | null;
-  error: {reg: string; login: string} | null;
+  error: any;
 }
 
 const initialState: AuthState = {
@@ -17,16 +16,23 @@ const initialState: AuthState = {
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
-  extraReducers: builder => {
-    builder.addCase(auth.fulfilled, (state, action: PayloadAction<any>) => {
+  reducers: {
+    authSucces: (state, action: PayloadAction<any>) => {
       const {token, userEmail} = action.payload;
       state.token = token;
       state.userEmail = userEmail;
-    });
-    builder.addCase(auth.rejected, (state, action: PayloadAction<any>) => {
-      state.error = action.payload;
-    });
+    },
+    setError: state => {
+      state.error = {
+        reg: 'User is already exist',
+        login: 'Wrong login or/and password',
+      };
+    },
+    clearError: state => {
+      state.error = null;
+    },
+  },
+  extraReducers: builder => {
     builder.addCase(getData.fulfilled, (state, action: PayloadAction<any>) => {
       const {token, userEmail} = action.payload;
       state.token = token;
@@ -38,6 +44,6 @@ export const authSlice = createSlice({
     });
   },
 });
-export const {} = authSlice.actions;
+export const {authSucces, setError, clearError} = authSlice.actions;
 
 export default authSlice.reducer;

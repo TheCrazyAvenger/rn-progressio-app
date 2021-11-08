@@ -3,10 +3,10 @@ import React, {useState} from 'react';
 import {Image, View} from 'react-native';
 import {AirbnbRating} from 'react-native-elements';
 import {styles} from './styles';
-import {THEME} from '../../constants';
-import {Typography} from '../../components/Typography';
+import {Screens, THEME} from '../../constants';
+import {Title, Description} from '../../components/Typography';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import {UI} from '../../ui';
+import {Block, Root, Button} from '../../ui';
 import {useNavigation} from '@react-navigation/core';
 import {useAppDispatch, useAppSelector} from '../../store/hooks';
 import {addProject} from '../../store/slices/addSlice';
@@ -14,7 +14,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {clearFields, launchCamera, openGallery, schema, IValues} from '..';
 import {setColor} from '../../utilities/utilities';
 import I18n from 'i18n-js';
-import {Components} from '../../components';
+import {FormItem} from '../../components';
 
 export const Add: React.FC = () => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -41,7 +41,7 @@ export const Add: React.FC = () => {
       ],
     };
     dispatch(addProject(project));
-    navigation.navigate('Main');
+    navigation.navigate(Screens.main);
   };
 
   const showDatePicker = () => {
@@ -77,13 +77,11 @@ export const Add: React.FC = () => {
       }) => {
         return (
           <>
-            <UI.Root>
-              <UI.Block>
-                <Typography.Title style={styles.title}>
-                  {I18n.t('addTitle1')}
-                </Typography.Title>
+            <Root>
+              <Block>
+                <Title style={styles.title}>{I18n.t('addTitle1')}</Title>
 
-                <Components.FormItem
+                <FormItem
                   title={I18n.t('name')}
                   value={values.name}
                   onChange={handleChange('name')}
@@ -93,7 +91,7 @@ export const Add: React.FC = () => {
                   errorMessage={errors.name}
                 />
 
-                <Components.FormItem
+                <FormItem
                   title={I18n.t('description')}
                   value={values.description}
                   onChange={handleChange('description')}
@@ -103,7 +101,7 @@ export const Add: React.FC = () => {
                   errorMessage={errors.description}
                 />
 
-                <Components.FormItem
+                <FormItem
                   title={I18n.t('category')}
                   value={values.category}
                   onChange={handleChange('category')}
@@ -112,14 +110,12 @@ export const Add: React.FC = () => {
                   isTouched={touched.category}
                   errorMessage={errors.category}
                 />
-              </UI.Block>
+              </Block>
 
-              <UI.Block>
-                <Typography.Title style={styles.title}>
-                  {I18n.t('addTitle2')}
-                </Typography.Title>
+              <Block>
+                <Title style={styles.title}>{I18n.t('addTitle2')}</Title>
 
-                <Components.FormItem
+                <FormItem
                   title={I18n.t('rating')}
                   isTouched={touched.rating}
                   errorMessage={errors.rating}
@@ -135,9 +131,9 @@ export const Add: React.FC = () => {
                       }}
                     />
                   </View>
-                </Components.FormItem>
+                </FormItem>
 
-                <Components.FormItem
+                <FormItem
                   title={I18n.t('time')}
                   value={values.time}
                   onChange={handleChange('time')}
@@ -147,21 +143,21 @@ export const Add: React.FC = () => {
                   errorMessage={errors.time}
                 />
 
-                <Components.FormItem
+                <FormItem
                   title={I18n.t('creationDate')}
                   isTouched={touched.date}
                   errorMessage={errors.date}
                   errorStyle={{left: 75, top: 50}}>
                   <View style={styles.dateInput}>
-                    <UI.Button
+                    <Button
                       name="calendar-outline"
                       style={styles.calendar}
                       color={THEME.COLOR_WHITE}
                       callback={showDatePicker}
                     />
-                    <Typography.Description style={styles.date}>
+                    <Description style={styles.date}>
                       {values.date === '' ? I18n.t('plDate') : values.date}
-                    </Typography.Description>
+                    </Description>
                   </View>
                   <DateTimePickerModal
                     isVisible={isDatePickerVisible}
@@ -175,20 +171,18 @@ export const Add: React.FC = () => {
                     }}
                     onCancel={hideDatePicker}
                   />
-                </Components.FormItem>
-              </UI.Block>
+                </FormItem>
+              </Block>
 
-              <UI.Block>
-                <Typography.Title style={styles.title}>
-                  {I18n.t('addTitle3')}
-                </Typography.Title>
+              <Block>
+                <Title style={styles.title}>{I18n.t('addTitle3')}</Title>
 
-                <Components.FormItem
+                <FormItem
                   isTouched={touched.path}
                   errorMessage={errors.path}
                   errorStyle={{left: 40, top: 60}}>
                   <View style={styles.buttons}>
-                    <UI.Button
+                    <Button
                       name="camera-outline"
                       color={THEME.COLOR_WHITE}
                       style={{
@@ -197,17 +191,17 @@ export const Add: React.FC = () => {
                       }}
                       callback={() => launchCamera(setFieldValue)}
                     />
-                    <UI.Button
+                    <Button
                       name="images-outline"
                       color={THEME.COLOR_WHITE}
                       style={styles.button}
                       callback={() => openGallery(setFieldValue)}
                     />
                   </View>
-                </Components.FormItem>
-              </UI.Block>
+                </FormItem>
+              </Block>
 
-              <UI.Block style={styles.imageBlock}>
+              <Block style={styles.imageBlock}>
                 {values.path ? (
                   <Image style={styles.image} source={{uri: values.path}} />
                 ) : (
@@ -217,9 +211,9 @@ export const Add: React.FC = () => {
                     size={100}
                   />
                 )}
-              </UI.Block>
-            </UI.Root>
-            <UI.Button
+              </Block>
+            </Root>
+            <Button
               color={THEME.COLOR_WHITE}
               style={{
                 ...styles.markButton,

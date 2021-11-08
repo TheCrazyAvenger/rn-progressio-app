@@ -4,9 +4,9 @@ import {useAppDispatch, useAppSelector} from '../../store/hooks';
 import {Image, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {toogleBookmarks} from '../../store/slices/addSlice';
-import {THEME} from '../../constants';
-import {UI} from '../../ui';
-import {Typography} from '../Typography';
+import {Screens, THEME} from '../../constants';
+import {Block} from '../../ui';
+import {Title, Subtitle} from '../Typography';
 import {styles} from './styles';
 import {ProjectItemProps} from '..';
 import i18n from 'i18n-js';
@@ -18,13 +18,13 @@ export const ProjectItem: React.FC<ProjectItemProps> = ({data}) => {
   const theme = useAppSelector(state => state.theme.theme);
 
   const openProject = () => {
-    navigation.navigate('Project', {
+    navigation.navigate(Screens.project, {
       data,
     });
   };
 
   return (
-    <UI.Block style={{padding: 0}}>
+    <Block style={{padding: 0}}>
       <TouchableOpacity
         onPress={openProject}
         activeOpacity={0.7}
@@ -36,10 +36,10 @@ export const ProjectItem: React.FC<ProjectItemProps> = ({data}) => {
         />
         <View style={styles.inner}>
           <View>
-            <Typography.Title>{data.name}</Typography.Title>
-            <Typography.Subtitle>
+            <Title>{data.name}</Title>
+            <Subtitle>
               {i18n.t('created')}: {data.date}
-            </Typography.Subtitle>
+            </Subtitle>
           </View>
           <View>
             <Icon name="arrow-forward" size={30} color={setColor(theme)} />
@@ -57,6 +57,6 @@ export const ProjectItem: React.FC<ProjectItemProps> = ({data}) => {
           />
         </TouchableOpacity>
       </TouchableOpacity>
-    </UI.Block>
+    </Block>
   );
 };

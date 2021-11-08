@@ -1,6 +1,7 @@
 import React from 'react';
-import {TouchableOpacity} from 'react-native';
+import {ActivityIndicator, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {THEME} from '../../constants';
 import {styles} from './styles';
 
 type ButtonTypes = {
@@ -12,6 +13,7 @@ type ButtonTypes = {
   size?: number;
   width?: number;
   height?: number;
+  loading?: boolean;
 };
 
 export const Button: React.FC<ButtonTypes> = ({
@@ -23,6 +25,7 @@ export const Button: React.FC<ButtonTypes> = ({
   size,
   width,
   height,
+  loading,
 }) => {
   return (
     <TouchableOpacity
@@ -35,7 +38,11 @@ export const Button: React.FC<ButtonTypes> = ({
         height: height ? height : 55,
         ...style,
       }}>
-      <Icon name={name} size={size ? size : 30} color={color} />
+      {loading ? (
+        <ActivityIndicator color={THEME.COLOR_WHITE} />
+      ) : (
+        <Icon name={name} size={size ? size : 30} color={color} />
+      )}
     </TouchableOpacity>
   );
 };

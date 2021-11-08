@@ -1,8 +1,7 @@
-import React, {useState} from 'react';
-import {Modal, TouchableOpacity, View} from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import {UI} from '..';
-import {Typography} from '../../components/Typography';
+import React from 'react';
+import {Modal, View} from 'react-native';
+import {Root, Block, Button} from '..';
+import {Title, Description} from '../../components/Typography';
 import {THEME} from '../../constants/theme';
 import {styles} from './styles';
 
@@ -23,28 +22,26 @@ export const DeleteModal: React.FC<DeleteModalProps> = ({
 }) => {
   return (
     <Modal animationType="fade" transparent={true} visible={visible}>
-      <UI.Root type="View" style={styles.modal}>
-        <UI.Block>
-          <Typography.Title>{title}</Typography.Title>
-          <Typography.Description style={styles.message}>
-            {message}
-          </Typography.Description>
+      <Root type="View" style={styles.modal}>
+        <Block>
+          <Title>{title}</Title>
+          <Description style={styles.message}>{message}</Description>
           <View style={styles.buttons}>
-            <UI.Button
+            <Button
               name="checkmark-outline"
               color={THEME.COLOR_WHITE}
               style={{...styles.button, backgroundColor: THEME.COLOR_BLUE}}
               callback={onSubmit}
             />
-            <UI.Button
+            <Button
               name="close-outline"
               color={THEME.COLOR_WHITE}
               style={styles.button}
               callback={onCancel}
             />
           </View>
-        </UI.Block>
-      </UI.Root>
+        </Block>
+      </Root>
     </Modal>
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Dimensions} from 'react-native';
-import {UI} from '../../ui';
-import {Typography} from '../Typography';
+import {Block} from '../../ui';
+import {Title} from '../Typography';
 import {styles} from './styles';
 
 type a = {
@@ -31,10 +31,10 @@ export const Chart: React.FC<a> = ({
 }) => {
   return (
     <>
-      <UI.Block>
-        <Typography.Title>{title}</Typography.Title>
-      </UI.Block>
-      <UI.Block style={{padding: 0}}>
+      <Block>
+        <Title>{title}</Title>
+      </Block>
+      <Block style={{padding: 0}}>
         <ChartType
           data={data}
           width={Dimensions.get('window').width}
@@ -60,7 +60,7 @@ export const Chart: React.FC<a> = ({
           style={styles.analytics}
           {...additionalProps}
         />
-      </UI.Block>
+      </Block>
     </>
   );
 };

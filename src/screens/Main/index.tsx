@@ -1,9 +1,9 @@
 import React, {useEffect, useMemo} from 'react';
 import {useAppDispatch, useAppSelector} from '../../store/hooks';
 import {styles} from './styles';
-import {Components} from '../../components';
-import {UI} from '../../ui';
-import {THEME} from '../../constants';
+import {ProjectItem, EmptyList} from '../../components';
+import {Root, Button} from '../../ui';
+import {Screens, THEME} from '../../constants';
 import {useNavigation} from '@react-navigation/core';
 import {IProject, Add} from '..';
 import {getGoal, getProjects} from '../../store/actions/projects';
@@ -25,27 +25,27 @@ export const Main: React.FC = () => {
   }, []);
 
   const openAdd = () => {
-    navigation.navigate(Add);
+    navigation.navigate(Screens.add);
   };
 
   const renderProjects = useMemo(() => {
     return projects.map((item: IProject) => (
-      <Components.ProjectItem key={item.id} data={item} />
+      <ProjectItem key={item.id} data={item} />
     ));
   }, [projects]);
 
   const renderScreen = () =>
     projects[0] ? (
-      <UI.Root>{renderProjects}</UI.Root>
+      <Root>{renderProjects}</Root>
     ) : (
-      <Components.EmptyList title={I18n.t('empty')} />
+      <EmptyList title={I18n.t('empty')} />
     );
 
   return (
     <>
       {renderScreen()}
 
-      <UI.Button
+      <Button
         name="add"
         color={THEME.COLOR_WHITE}
         style={styles.addButton}

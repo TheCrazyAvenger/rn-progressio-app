@@ -1,6 +1,6 @@
 import React from 'react';
-import {Forms} from '../../forms';
+import {Edit as EditForm} from '../../forms';
 
 export const Edit: React.FC = () => {
-  return <Forms.Edit />;
+  return <EditForm />;
 };

@@ -1,14 +1,13 @@
 import {useNavigation, useRoute} from '@react-navigation/core';
 import I18n from 'i18n-js';
 import React, {useMemo, useState} from 'react';
-import {Alert, Image, View} from 'react-native';
+import {Image, View} from 'react-native';
 import {IRengerInfo} from '..';
-import {Typography} from '../../components/Typography';
+import {H2, Description, Title, Subtitle} from '../../components/Typography';
 import {useAppDispatch} from '../../store/hooks';
 import {removeProject} from '../../store/slices/addSlice';
-import {THEME} from '../../constants';
-import {UI} from '../../ui';
-
+import {Screens, THEME} from '../../constants';
+import {Root, Block, Button, DeleteModal} from '../../ui';
 import {styles} from './styles';
 
 export const Project: React.FC = () => {
@@ -19,7 +18,7 @@ export const Project: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const editHandler = () => {
-    navigation.navigate('Edit', {
+    navigation.navigate(Screens.edit, {
       data,
     });
   };
@@ -28,12 +27,10 @@ export const Project: React.FC = () => {
     return data.info.map((item: IRengerInfo, i: number) => {
       return (
         <View style={styles.renderInfo} key={i}>
-          <Typography.H2>{I18n.t(item.name)}</Typography.H2>
+          <H2>{I18n.t(item.name)}</H2>
           <View style={styles.infoInner}>
-            <Typography.Description>{item.value}</Typography.Description>
-            {item.type ? (
-              <Typography.Description>{item.type}</Typography.Description>
-            ) : null}
+            <Description>{item.value}</Description>
+            {item.type ? <Description>{item.type}</Description> : null}
           </View>
         </View>
       );
@@ -41,67 +38,61 @@ export const Project: React.FC = () => {
   }, [data]);
 
   return (
-    <UI.Root>
-      <UI.DeleteModal
+    <Root>
+      <DeleteModal
         title={I18n.t('alertTitle')}
         message={I18n.t('alertMessage')}
         onSubmit={() => {
           dispatch(removeProject(data.id));
           setModalVisible(false);
-          navigation.navigate('Main');
+          navigation.navigate(Screens.main);
         }}
         onCancel={() => setModalVisible(false)}
         visible={modalVisible}
       />
 
-      <UI.Block style={{padding: 0}}>
+      <Block style={{padding: 0}}>
         <Image
           source={{uri: data.img}}
           resizeMode="stretch"
           style={styles.image}
         />
-      </UI.Block>
+      </Block>
 
-      <UI.Block>
-        <Typography.Title style={styles.title}>{data.name}</Typography.Title>
-        <Typography.Description style={{marginBottom: 15}}>
-          <Typography.Title style={{fontSize: 18}}>
-            {I18n.t('description')}:
-          </Typography.Title>{' '}
+      <Block>
+        <Title style={styles.title}>{data.name}</Title>
+        <Description style={{marginBottom: 15}}>
+          <Title style={{fontSize: 18}}>{I18n.t('description')}:</Title>{' '}
           {data.description}
-        </Typography.Description>
+        </Description>
 
-        <Typography.Subtitle>
+        <Subtitle>
           {I18n.t('created')}: {data.date}
-        </Typography.Subtitle>
-      </UI.Block>
+        </Subtitle>
+      </Block>
 
-      <UI.Block>
-        <Typography.Title style={styles.title}>
-          {I18n.t('info')}
-        </Typography.Title>
+      <Block>
+        <Title style={styles.title}>{I18n.t('info')}</Title>
         <View style={styles.info}>{renderInfo}</View>
-      </UI.Block>
+      </Block>
 
-      <UI.Block>
-        <Typography.Title style={styles.title}>
-          {I18n.t('actions')}
-        </Typography.Title>
+      <Block>
+        <Title style={styles.title}>{I18n.t('actions')}</Title>
         <View style={styles.buttons}>
-          <UI.Button
+          <Button
             name="pencil-outline"
             color={THEME.COLOR_WHITE}
             style={{...styles.button, backgroundColor: THEME.COLOR_BLUE}}
             callback={editHandler}
           />
-          <UI.Button
+          <Button
             name="close-outline"
             color={THEME.COLOR_WHITE}
             style={styles.button}
             callback={() => setModalVisible(true)}
           />
         </View>
-      </UI.Block>
-    </UI.Root>
+      </Block>
+    </Root>
   );
 };

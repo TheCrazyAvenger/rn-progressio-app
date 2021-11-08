@@ -1,6 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import axios from 'axios';
 
 interface IData {
   projects: any;
@@ -37,38 +36,3 @@ export const getGoal = createAsyncThunk('projects/getGoal', async () => {
     console.log(e);
   }
 });
-
-export const exportData = createAsyncThunk(
-  'projects/exportData',
-  async (data: IData) => {
-    try {
-      const {userEmail, projects} = data;
-
-      const path = userEmail!.split('.')[0];
-
-      const url = `https://rn-progressio-ccdee-default-rtdb.firebaseio.com/${path}.json`;
-
-      await axios.put(url, projects);
-    } catch (e) {
-      console.log(e);
-    }
-  },
-);
-
-export const importData = createAsyncThunk(
-  'projects/importData',
-  async (userEmail: string | null) => {
-    try {
-      const path = userEmail!.split('.')[0];
-
-      const url = `https://rn-progressio-ccdee-default-rtdb.firebaseio.com/${path}.json`;
-
-      const response = await axios.get(url);
-      const data = response.data;
-
-      return data;
-    } catch (e) {
-      console.log(e);
-    }
-  },
-);

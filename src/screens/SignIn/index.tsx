@@ -1,6 +1,6 @@
 import React from 'react';
-import {Forms} from '../../forms';
+import {SignUp} from '../../forms';
 
 export const SignIn: React.FC = () => {
-  return <Forms.SignUp />;
+  return <SignUp />;
 };

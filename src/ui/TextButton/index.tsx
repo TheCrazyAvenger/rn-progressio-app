@@ -1,7 +1,5 @@
 import React from 'react';
-import {TouchableOpacity} from 'react-native';
 import {Button} from 'react-native-elements';
-import Icon from 'react-native-vector-icons/Ionicons';
 import {useAppSelector} from '../../store/hooks';
 import {setColor} from '../../utilities/utilities';
 import {styles} from './styles';

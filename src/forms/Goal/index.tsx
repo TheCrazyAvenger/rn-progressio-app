@@ -5,10 +5,10 @@ import {THEME} from '../../constants';
 import {GoalFormTypes, goalSchema} from '..';
 import {styles} from './styles';
 import {useAppDispatch, useAppSelector} from '../../store/hooks';
-import {UI} from '../../ui';
+import {Block, Button} from '../../ui';
 import {setGoal} from '../../store/slices/addSlice';
 import {setColor} from '../../utilities/utilities';
-import {Components} from '../../components';
+import {FormItem} from '../../components';
 
 export const Goal: React.FC<GoalFormTypes> = ({
   callback,
@@ -40,11 +40,9 @@ export const Goal: React.FC<GoalFormTypes> = ({
         handleSubmit,
       }) => {
         return (
-          <UI.Block>
+          <Block>
             <View style={styles.inputView}>
-              <Components.FormItem
-                isTouched={touched.goal}
-                errorMessage={errors.goal}>
+              <FormItem isTouched={touched.goal} errorMessage={errors.goal}>
                 <View style={{position: 'relative'}}>
                   <TextInput
                     keyboardType={'number-pad'}
@@ -63,9 +61,9 @@ export const Goal: React.FC<GoalFormTypes> = ({
                     placeholder={placeholder}
                   />
                 </View>
-              </Components.FormItem>
+              </FormItem>
 
-              <UI.Button
+              <Button
                 color={THEME.COLOR_WHITE}
                 style={{
                   marginLeft: 15,
@@ -78,7 +76,7 @@ export const Goal: React.FC<GoalFormTypes> = ({
                 callback={handleSubmit}
               />
               {callback && (
-                <UI.Button
+                <Button
                   color={THEME.COLOR_WHITE}
                   style={{
                     marginLeft: 15,
@@ -88,7 +86,7 @@ export const Goal: React.FC<GoalFormTypes> = ({
                 />
               )}
             </View>
-          </UI.Block>
+          </Block>
         );
       }}
     </Formik>
