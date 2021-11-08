@@ -24,7 +24,7 @@ export const DeleteModal: React.FC<DeleteModalProps> = ({
     <Modal animationType="fade" transparent={true} visible={visible}>
       <Root type="View" style={styles.modal}>
         <Block>
-          <Title>{title}</Title>
+          <Title style={{textAlign: 'center'}}>{title}</Title>
           <Description style={styles.message}>{message}</Description>
           <View style={styles.buttons}>
             <Button

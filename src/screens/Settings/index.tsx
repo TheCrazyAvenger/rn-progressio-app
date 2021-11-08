@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {styles} from './styles';
-import {ActivityIndicator, View} from 'react-native';
+import {View} from 'react-native';
 import {Switch} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {Title, Subtitle, Description, H2} from '../../components/Typography';
@@ -70,13 +70,16 @@ export const Settings: React.FC = () => {
           )}
           <Button
             name={token ? 'log-out' : 'log-in'}
-            disabled={isLoadingAuth}
+            disabled={isLoadingAuth && isLoading && isLoadingImport}
             width={40}
             height={40}
             size={25}
             color={THEME.COLOR_WHITE}
             style={{
-              backgroundColor: !isLoading ? THEME.COLOR_RED : THEME.COLOR_GRAY,
+              backgroundColor:
+                !isLoadingAuth && !isLoading && !isLoadingImport
+                  ? THEME.COLOR_RED
+                  : THEME.COLOR_GRAY,
             }}
             callback={() =>
               token

@@ -21,6 +21,7 @@ export const BottomTabs: React.FC = () => {
         tabBarStyle: {height: 60},
         tabBarLabelStyle: {color: setColor(theme), marginBottom: 5},
         headerShown: false,
+        tabBarActiveTintColor: THEME.COLOR_RED,
       }}>
       <Tab.Screen
         name={Screens.main}
@@ -33,7 +34,7 @@ export const BottomTabs: React.FC = () => {
             return (
               <Icon
                 name={iconName}
-                size={focused ? 30 : 25}
+                size={25}
                 color={focused ? THEME.COLOR_RED : setColor(theme)}
               />
             );
@@ -51,7 +52,7 @@ export const BottomTabs: React.FC = () => {
             return (
               <Icon
                 name={iconName}
-                size={focused ? 30 : 25}
+                size={25}
                 color={focused ? THEME.COLOR_RED : setColor(theme)}
               />
             );
@@ -69,7 +70,7 @@ export const BottomTabs: React.FC = () => {
             return (
               <Icon
                 name={iconName}
-                size={focused ? 30 : 25}
+                size={25}
                 color={focused ? THEME.COLOR_RED : setColor(theme)}
               />
             );

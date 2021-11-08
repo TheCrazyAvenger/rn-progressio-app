@@ -52,6 +52,8 @@ export const en = {
   signUp: 'Sign up',
   signIn: 'Sign in',
   signTitle: 'Auth',
+  signInError: `User is already exist, or maybe you don't have internet connection`,
+  signUpError: `Wrong login or/and password, or maybe you don't have internet connection`,
 
   //Forms
   addTitle1: 'Tell about your project',
@@ -150,6 +152,8 @@ export const ru = {
   export: 'Сохранить данные',
   about: 'О приложении',
   version: 'Версия',
+  alertLogout: 'Вы уверены, что хотите выйти?',
+  logoutMessage: 'Все несохраненные данные будут удалены',
 
   //Login
   signUpMessage: 'Нет аккаунта?',
@@ -157,6 +161,10 @@ export const ru = {
   signUp: 'Регистрация',
   signIn: 'Войти',
   signTitle: 'Авторизация',
+  signInError:
+    'Пользователь уже зарегестрирован, или же отсутствует интернет соединение',
+  signUpError:
+    'Неверный логин и/или пароль, или же отсутствует интернет соединение',
 
   //Forms
   addTitle1: 'Расскажите о проекте',

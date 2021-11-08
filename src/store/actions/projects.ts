@@ -1,11 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 
-interface IData {
-  projects: any;
-  userEmail: string | null;
-}
-
 export const getProjects = createAsyncThunk(
   'projects/getProjects',
   async () => {

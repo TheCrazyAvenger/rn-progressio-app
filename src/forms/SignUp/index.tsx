@@ -19,7 +19,6 @@ export const SignUp: React.FC = () => {
 
   const [auth] = useAuthMutation();
   const error = useAppSelector(state => state.auth.error);
-  console.log(error);
 
   const dispatch = useAppDispatch();
 

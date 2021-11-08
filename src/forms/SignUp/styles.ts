@@ -15,5 +15,6 @@ export const styles = StyleSheet.create({
   authError: {
     color: THEME.COLOR_RED,
     marginTop: 15,
+    textAlign: 'center',
   },
 });

@@ -5,11 +5,11 @@ import {ProjectItem, EmptyList} from '../../components';
 import {Root, Button} from '../../ui';
 import {Screens, THEME} from '../../constants';
 import {useNavigation} from '@react-navigation/core';
-import {IProject, Add} from '..';
+import {IProject} from '..';
 import {getGoal, getProjects} from '../../store/actions/projects';
 import {getTheme} from '../../store/actions/theme';
 import I18n from 'i18n-js';
-import {getData} from '../../store/actions/auth';
+import {autoLogin} from '../../store/actions/auth';
 
 export const Main: React.FC = () => {
   const projects = useAppSelector(state => state.projects.projects);
@@ -21,7 +21,8 @@ export const Main: React.FC = () => {
     dispatch(getProjects());
     dispatch(getGoal());
     dispatch(getTheme());
-    dispatch(getData());
+    dispatch(autoLogin());
+    autoLogin();
   }, []);
 
   const openAdd = () => {

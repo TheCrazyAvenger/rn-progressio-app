@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
   },
   message: {
     marginVertical: 15,
+    textAlign: 'center',
   },
   buttons: {
     flexDirection: 'row',

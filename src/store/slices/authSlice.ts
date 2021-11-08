@@ -1,5 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {getData, logout} from '../actions/auth';
+import {autoLogin, logout} from '../actions/auth';
+import i18n from 'i18n-js';
 
 export interface AuthState {
   token: string | null;
@@ -24,8 +25,8 @@ export const authSlice = createSlice({
     },
     setError: state => {
       state.error = {
-        reg: 'User is already exist',
-        login: 'Wrong login or/and password',
+        reg: i18n.t('signInError'),
+        login: i18n.t('signUpError'),
       };
     },
     clearError: state => {
@@ -33,11 +34,14 @@ export const authSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(getData.fulfilled, (state, action: PayloadAction<any>) => {
-      const {token, userEmail} = action.payload;
-      state.token = token;
-      state.userEmail = userEmail;
-    });
+    builder.addCase(
+      autoLogin.fulfilled,
+      (state, action: PayloadAction<any>) => {
+        const {token, userEmail} = action.payload;
+        state.token = token;
+        state.userEmail = userEmail;
+      },
+    );
     builder.addCase(logout.fulfilled, state => {
       state.token = null;
       state.userEmail = null;
