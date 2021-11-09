@@ -1,9 +1,11 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
+import {FIREBASE_API_KEY, BASE_URL} from '@env';
+
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://rn-progressio-ccdee-default-rtdb.firebaseio.com/',
+    baseUrl: BASE_URL,
   }),
   endpoints: builder => ({
     importProjects: builder.mutation({
@@ -32,11 +34,9 @@ export const authApi = createApi({
           returnSecureToken: true,
         };
 
-        let url =
-          'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCnJXnI7jzSpr3JbfQlbl00j7q1sS58EH4';
+        let url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${FIREBASE_API_KEY}`;
         if (isLogin) {
-          url =
-            'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCnJXnI7jzSpr3JbfQlbl00j7q1sS58EH4';
+          url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${FIREBASE_API_KEY}`;
         }
 
         return {
