@@ -14,7 +14,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {clearFields, launchCamera, openGallery, schema, IValues} from '..';
 import {setColor} from '../../utilities/utilities';
 import I18n from 'i18n-js';
-import {FormItem} from '../../components';
+import {FormItem, FormPicker} from '../../components';
 
 export const Add: React.FC = () => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -104,12 +104,18 @@ export const Add: React.FC = () => {
                 <FormItem
                   title={I18n.t('category')}
                   value={values.category}
-                  onChange={handleChange('category')}
-                  onBlur={() => setFieldTouched('category')}
-                  placeholder={I18n.t('plCategory')}
                   isTouched={touched.category}
                   errorMessage={errors.category}
-                />
+                  style={{minWidth: '100%'}}>
+                  <FormPicker
+                    errorMessage={errors.category}
+                    isTouched={touched.category}
+                    placeholder="Category"
+                    setCategoryValue={(value: string) =>
+                      setFieldValue('category', value)
+                    }
+                  />
+                </FormItem>
               </Block>
 
               <Block>

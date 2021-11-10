@@ -23,7 +23,12 @@ export const FormItem: React.FC<FormItemProps> = ({
   return (
     <View>
       {title ? <Description>{title}:</Description> : null}
-      <View style={{position: 'relative'}}>
+      <View
+        style={{
+          position: 'relative',
+          maxWidth: '100%',
+          alignItems: 'flex-start',
+        }}>
         {children ? (
           children
         ) : (

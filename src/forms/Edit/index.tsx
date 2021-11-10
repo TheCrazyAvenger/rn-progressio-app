@@ -13,7 +13,7 @@ import {useAppDispatch, useAppSelector} from '../../store/hooks';
 import {updateProject} from '../../store/slices/addSlice';
 import I18n from 'i18n-js';
 import {AirbnbRating} from 'react-native-elements';
-import {FormItem} from '../../components';
+import {FormItem, FormPicker} from '../../components';
 
 export const Edit: React.FC = () => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -111,12 +111,18 @@ export const Edit: React.FC = () => {
                 <FormItem
                   title={I18n.t('category')}
                   value={values.category}
-                  onChange={handleChange('category')}
-                  onBlur={() => setFieldTouched('category')}
-                  placeholder={I18n.t('plCategory')}
                   isTouched={touched.category}
                   errorMessage={errors.category}
-                />
+                  style={{minWidth: '100%'}}>
+                  <FormPicker
+                    errorMessage={errors.category}
+                    isTouched={touched.category}
+                    placeholder="Category"
+                    setCategoryValue={(value: string) =>
+                      setFieldValue('category', value)
+                    }
+                  />
+                </FormItem>
 
                 <FormItem
                   title={I18n.t('rating')}

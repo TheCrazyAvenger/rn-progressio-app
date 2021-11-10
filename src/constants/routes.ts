@@ -4,6 +4,7 @@ export enum Screens {
   main = 'main',
   project = 'project',
   settings = 'settings',
+  setting = 'setting',
   bookmarks = 'bookmarks',
   edit = 'edit',
   signin = 'signin',

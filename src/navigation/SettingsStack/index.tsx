@@ -18,7 +18,7 @@ export const SettingsStack: React.FC = () => {
         headerTitleStyle: {...styles.titleStyle, color: setColor(theme)},
       }}>
       <Stack.Screen
-        name={Screens.settings}
+        name={Screens.setting}
         options={{
           headerShown: false,
         }}

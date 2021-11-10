@@ -13,12 +13,7 @@ export let schema = yup.object().shape({
     .required(I18n.t('scDescription'))
     .min(3, I18n.t('scMin'))
     .matches(/^[a-zA-Z ',.?""''!]+$/, {message: I18n.t('scMatches')}),
-  category: yup
-    .string()
-    .required(I18n.t('scCategory'))
-    .min(3, I18n.t('scMin'))
-    .matches(/^[a-zA-Z ]+$/, {message: I18n.t('scMatches')})
-    .max(12, 'Only 12 letters'),
+  category: yup.string().required().label('Category'),
   rating: yup.number().required(I18n.t('scRating')),
   time: yup.number().required(I18n.t('scTime')).max(999, I18n.t('scTimeMax')),
   date: yup.string().required(I18n.t('scDate')),

@@ -19,25 +19,20 @@ export const BottomTabs: React.FC = () => {
     <Tab.Navigator
       screenOptions={{
         tabBarStyle: {height: 60},
-        tabBarLabelStyle: {color: setColor(theme), marginBottom: 5},
+        tabBarLabelStyle: {marginBottom: 7},
         headerShown: false,
         tabBarActiveTintColor: THEME.COLOR_RED,
+        tabBarInactiveTintColor: setColor(theme),
       }}>
       <Tab.Screen
         name={Screens.main}
         options={{
           title: 'Progressio',
 
-          tabBarIcon: ({focused}) => {
+          tabBarIcon: ({focused, size, color}) => {
             const iconName = focused ? 'home' : 'home-outline';
 
-            return (
-              <Icon
-                name={iconName}
-                size={25}
-                color={focused ? THEME.COLOR_RED : setColor(theme)}
-              />
-            );
+            return <Icon name={iconName} size={size} color={color} />;
           },
         }}
         component={TopTabs}
@@ -46,34 +41,22 @@ export const BottomTabs: React.FC = () => {
         name={Screens.analytics}
         options={{
           title: I18n.t('analytics'),
-          tabBarIcon: ({focused}) => {
+          tabBarIcon: ({focused, size, color}) => {
             const iconName = focused ? 'pie-chart' : 'pie-chart-outline';
 
-            return (
-              <Icon
-                name={iconName}
-                size={25}
-                color={focused ? THEME.COLOR_RED : setColor(theme)}
-              />
-            );
+            return <Icon name={iconName} size={size} color={color} />;
           },
         }}
         component={Analytics}
       />
       <Tab.Screen
-        name="Settings"
+        name={Screens.settings}
         options={{
           title: I18n.t('settings'),
-          tabBarIcon: ({focused}) => {
+          tabBarIcon: ({focused, size, color}) => {
             const iconName = focused ? 'settings' : 'settings-outline';
 
-            return (
-              <Icon
-                name={iconName}
-                size={25}
-                color={focused ? THEME.COLOR_RED : setColor(theme)}
-              />
-            );
+            return <Icon name={iconName} size={size} color={color} />;
           },
         }}
         component={SettingsStack}

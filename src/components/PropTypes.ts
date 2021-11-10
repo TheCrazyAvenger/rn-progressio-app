@@ -26,3 +26,10 @@ export type FormItemProps = {
   errorStyle?: any;
   style?: any;
 };
+
+export type FormPickerProps = {
+  setCategoryValue: any;
+  placeholder: string;
+  errorMessage: any;
+  isTouched: any;
+};

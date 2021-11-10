@@ -66,7 +66,7 @@ export const SignUp: React.FC = () => {
       );
       dispatch(authSucces({userEmail, token}));
 
-      navigation.navigate(Screens.settings);
+      navigation.navigate(Screens.setting);
     } else {
       dispatch(setError());
     }
